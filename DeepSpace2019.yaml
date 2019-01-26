@@ -110,16 +110,6 @@ Children:
   - Children:
     - Children: []
       Properties:
-        CAN ID: !!robotbuilder.data.properties.ChoicesProperty
-          choices: *id001
-          default: '2'
-          name: CAN ID
-          validators: *id002
-          value: '4'
-      Base: Talon SRX
-      Name: elevatorMotor
-    - Children: []
-      Properties:
         Input Channel (Digital): !!robotbuilder.data.properties.ChoicesProperty
           choices: &id003 ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10',
             '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22',
@@ -140,6 +130,26 @@ Children:
           value: '1'
       Base: Limit Switch
       Name: elevatorBottomSwitch
+    - Children: []
+      Properties:
+        Type: !!robotbuilder.data.properties.ChoicesProperty
+          choices: &id014 [Victor, Jaguar, Talon, VictorSP, PWMTalonSRX, Spark, SD540,
+            PWMVictorSPX, DMC60]
+          default: Spark
+          name: Type
+          validators: null
+          value: Spark
+        Output Channel (PWM): !!robotbuilder.data.properties.ChoicesProperty
+          choices: &id015 ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10',
+            '11', '12', '13', '14', '15', '16', '17', '18', '19']
+          default: '0'
+          name: Output Channel (PWM)
+          validators: &id016 [PWMOutput]
+          value: '1'
+        Inverted: !!robotbuilder.data.properties.BooleanProperty {default: false,
+          name: Inverted, validators: null, value: false}
+      Base: Speed Controller
+      Name: elevatorMotor
     Properties:
       Send to SmartDashboard: !!robotbuilder.data.properties.BooleanProperty {default: false,
         name: Send to SmartDashboard, validators: null, value: false}
@@ -311,18 +321,16 @@ Children:
     - Children: []
       Properties:
         Type: !!robotbuilder.data.properties.ChoicesProperty
-          choices: [Victor, Jaguar, Talon, VictorSP, PWMTalonSRX, Spark, SD540, PWMVictorSPX,
-            DMC60]
+          choices: *id014
           default: Spark
           name: Type
           validators: null
           value: Spark
         Output Channel (PWM): !!robotbuilder.data.properties.ChoicesProperty
-          choices: ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11',
-            '12', '13', '14', '15', '16', '17', '18', '19']
+          choices: *id015
           default: '0'
           name: Output Channel (PWM)
-          validators: [PWMOutput]
+          validators: *id016
           value: '0'
         Inverted: !!robotbuilder.data.properties.BooleanProperty {default: false,
           name: Inverted, validators: null, value: false}
@@ -362,7 +370,7 @@ Children:
         default: []
         name: Constants
         validators: null
-        value: &id014 []
+        value: &id017 []
     Base: Subsystem
     Name: flap
   - Children:
@@ -391,7 +399,7 @@ Children:
         default: []
         name: Constants
         validators: null
-        value: *id014
+        value: *id017
     Base: Subsystem
     Name: compressorSS
   Properties: {}
@@ -401,20 +409,20 @@ Children:
   - Children: []
     Properties:
       Number: !!robotbuilder.data.properties.ChoicesProperty
-        choices: &id015 ['0', '1', '2', '3', '4', '5']
+        choices: &id018 ['0', '1', '2', '3', '4', '5']
         default: 1
         name: Number
-        validators: &id016 [Joystick]
+        validators: &id019 [Joystick]
         value: '0'
     Base: Joystick
     Name: driveStick
   - Children: []
     Properties:
       Number: !!robotbuilder.data.properties.ChoicesProperty
-        choices: *id015
+        choices: *id018
         default: 1
         name: Number
-        validators: *id016
+        validators: *id019
         value: '1'
     Base: Joystick
     Name: manipulatorStick
