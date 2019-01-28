@@ -42,6 +42,13 @@ public class driveManual extends Command {
     // Called repeatedly when this Command is scheduled to run
     @Override
     protected void execute() {
+        if(Robot.oi.driveStick.getMagnitude() > .05){
+            double strafe = Robot.oi.driveStick.getX();
+            double vertical = Robot.oi.driveStick.getY();
+            double rotation = Robot.oi.driveStick.getRawAxis(2);
+            double gyroDeg = Robot.AHRS.getAngle();
+            Robot.driveTrain.fieldDrive(strafe, vertical, rotation, gyroDeg);
+        }
     }
 
     // Make this return true when this Command no longer needs to run execute()
