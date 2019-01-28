@@ -102,6 +102,11 @@ public class driveTrain extends Subsystem {
 
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
+    public void fieldDrive(double strafe, double vertical, double rotation, double gyroDeg){
+        mecanumDrive.driveCartesian(strafe, vertical, rotation / 3, gyroDeg);
+    }
+
+
 
 }
 
