@@ -106,6 +106,9 @@ public class driveTrain extends Subsystem {
         mecanumDrive.driveCartesian(strafe, vertical, rotation / 3, gyroDeg);
     }
 
+    public void slowfieldDrive(double strafe, double vertical, double rotation, double gyroDeg){
+        mecanumDrive.driveCartesian(strafe / 2, vertical / 2, rotation / 3, gyroDeg);
+    }
 
 
 }

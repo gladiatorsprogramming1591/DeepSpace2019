@@ -38,17 +38,33 @@ public class driveManual extends Command {
     // Called just before this Command runs the first time
     @Override
     protected void initialize() {
+        Robot.AHRS.reset();
     }
+
+        boolean slow;
 
     // Called repeatedly when this Command is scheduled to run
     @Override
     protected void execute() {
-        if(Robot.oi.driveStick.getMagnitude() > .05){
+    if (Robot.oi.driveStick.getRawButtonPressed(8)) {
+        slow = true;
+    } else if (Robot.oi.driveStick.getRawButtonReleased(8)) {
+        slow = false;
+    }
+
+
+        if(Robot.oi.driveStick.getMagnitude() > .05 && !slow){
             double strafe = Robot.oi.driveStick.getX();
             double vertical = Robot.oi.driveStick.getY();
             double rotation = Robot.oi.driveStick.getRawAxis(2);
             double gyroDeg = Robot.AHRS.getAngle();
             Robot.driveTrain.fieldDrive(strafe, vertical, rotation, gyroDeg);
+        }   else if(Robot.oi.driveStick.getMagnitude() > .05 && slow){
+                double strafe = Robot.oi.driveStick.getX();
+                double vertical = Robot.oi.driveStick.getY();
+                double rotation = Robot.oi.driveStick.getRawAxis(2);
+                double gyroDeg = Robot.AHRS.getAngle();
+                Robot.driveTrain.slowfieldDrive(strafe, vertical, rotation, gyroDeg);
         }
     }
 
