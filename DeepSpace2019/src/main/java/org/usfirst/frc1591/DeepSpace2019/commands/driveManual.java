@@ -51,20 +51,21 @@ public class driveManual extends Command {
     } else if (Robot.oi.driveStick.getRawButtonReleased(8)) {
         slow = false;
     }
-
-
-        if(Robot.oi.driveStick.getMagnitude() > .05 && !slow){
+    
+        if((Robot.oi.driveStick.getMagnitude() > .05) && !slow){
             double strafe = Robot.oi.driveStick.getX();
             double vertical = Robot.oi.driveStick.getY();
             double rotation = Robot.oi.driveStick.getRawAxis(2);
             double gyroDeg = Robot.AHRS.getAngle();
             Robot.driveTrain.fieldDrive(strafe, vertical, rotation, gyroDeg);
-        }   else if(Robot.oi.driveStick.getMagnitude() > .05 && slow){
+        }   else if((Robot.oi.driveStick.getMagnitude() > .05) && slow){
                 double strafe = Robot.oi.driveStick.getX();
                 double vertical = Robot.oi.driveStick.getY();
                 double rotation = Robot.oi.driveStick.getRawAxis(2);
                 double gyroDeg = Robot.AHRS.getAngle();
                 Robot.driveTrain.slowfieldDrive(strafe, vertical, rotation, gyroDeg);
+        }   else if(Robot.oi.driveStick.getMagnitude() < .05){
+                Robot.driveTrain.fieldDrive(0, 0, 0, 0);
         }
     }
 
