@@ -151,3 +151,6 @@ bin/
 
 
 # End of https://www.gitignore.io/api/c++,java,linux,macos,gradle,windows,visualstudiocode
+
+# Additional ignores added manually
+RPiVisionCode/.gradle/5.0/fileHashes/fileHashes.lock
