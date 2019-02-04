@@ -23,6 +23,8 @@ import edu.wpi.cscore.MjpegServer;
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.cscore.VideoSource;
 import edu.wpi.first.cameraserver.CameraServer;
+import edu.wpi.first.networktables.NetworkTable;
+import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.vision.VisionPipeline;
 import edu.wpi.first.vision.VisionThread;
@@ -30,6 +32,9 @@ import org.usfirst.frc0.vision2019.*;
 
 import org.opencv.core.Mat;
 import org.opencv.core.MatOfPoint;
+import org.opencv.core.Rect;
+import org.opencv.imgproc.Imgproc;
+import org.opencv.core.Point;
 
 
 /*
@@ -248,7 +253,27 @@ public final class Main{
       //   // do something with pipeline results
       // });
       VisionThread visionThread = new VisionThread(cameras.get(0), new GripPipelineTest(), pipeline -> {
-        
+        if (!pipeline.filterContoursOutput().isEmpty()) {
+          // getting contour info
+          Rect r = Imgproc.boundingRect(pipeline.filterContoursOutput().get(0));
+
+          // formatting network table framework
+          NetworkTable table = ntinst.getTable("datatable");
+          NetworkTableEntry tlXEntry = table.getEntry("tlX");
+          NetworkTableEntry tlYEntry = table.getEntry("tlY");
+          NetworkTableEntry brXEntry = table.getEntry("brX");
+          NetworkTableEntry brYEntry = table.getEntry("brY");
+
+          // putting top left point to network tables
+          Point tl = r.tl();
+          tlXEntry.setNumber(tl.x);
+          tlYEntry.setNumber(tl.y);
+
+          // putting bottom right point to network tables
+          Point br = r.br();
+          brXEntry.setNumber(br.x);
+          brYEntry.setNumber(br.y);
+      }
       });
       visionThread.start();
       
