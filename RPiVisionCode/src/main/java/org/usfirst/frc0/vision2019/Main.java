@@ -259,20 +259,13 @@ public final class Main{
 
           // formatting network table framework
           NetworkTable table = ntinst.getTable("datatable");
-          NetworkTableEntry tlXEntry = table.getEntry("tlX");
-          NetworkTableEntry tlYEntry = table.getEntry("tlY");
-          NetworkTableEntry brXEntry = table.getEntry("brX");
-          NetworkTableEntry brYEntry = table.getEntry("brY");
 
-          // putting top left point to network tables
-          Point tl = r.tl();
-          tlXEntry.setNumber(tl.x);
-          tlYEntry.setNumber(tl.y);
+          // send rectangle object outputted by pipeline to network tables
+          NetworkTableEntry rectEntry = table.getEntry("rect");
+          rectEntry.setValue(r);
 
-          // putting bottom right point to network tables
-          Point br = r.br();
-          brXEntry.setNumber(br.x);
-          brYEntry.setNumber(br.y);
+          //example of how to pull out in robot code
+          // Rect getR = (Rect)rectEntry.getValue().getValue();
       }
       });
       visionThread.start();
