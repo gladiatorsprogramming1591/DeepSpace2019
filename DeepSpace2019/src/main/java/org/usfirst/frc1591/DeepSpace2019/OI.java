@@ -83,8 +83,6 @@ public class OI {
         SmartDashboard.putData("unliftRear", new unliftRear());
         SmartDashboard.putData("compressorOn", new compressorOn());
         SmartDashboard.putData("compressorOff", new compressorOff());
-        SmartDashboard.putData("flapOpen", new flapOpen());
-        SmartDashboard.putData("flapClose", new flapClose());
         SmartDashboard.putData("driveSlow", new driveSlow());
         SmartDashboard.putData("exampleCommandGroup", new exampleCommandGroup());
         SmartDashboard.putData("timedDrive", new timedDrive());
