@@ -110,6 +110,13 @@ public class driveTrain extends Subsystem {
         mecanumDrive.driveCartesian(strafe / 2, vertical / 2, rotation / 3, gyroDeg);
     }
 
+    public void timedDrive(double speed, double direction, double rotation){
+        mecanumDrive.drivePolar(speed, direction, rotation);
+    }
 
+    public void standingRotation(double rotation){
+        mecanumDrive.driveCartesian(0, 0, rotation);
+    }
+    // watch for changing rotation divisor and slow speed divisors
 }
 
