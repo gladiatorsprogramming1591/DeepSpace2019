@@ -158,3 +158,10 @@ bin/
 
 # KDiff merge files
 *.orig
+
+# Build Files
+build/
+.gradle/
+
+#WPIlib
+.wpilib
