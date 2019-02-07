@@ -125,5 +125,7 @@ public class Robot extends TimedRobot {
     @Override
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
+
+        System.out.println("CHECK 123");
     }
 }

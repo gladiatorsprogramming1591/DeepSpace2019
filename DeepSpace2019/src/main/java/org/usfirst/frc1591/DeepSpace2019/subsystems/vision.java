@@ -57,6 +57,8 @@ public class vision extends Subsystem {
         table = ntinst.getTable("datatable");
         rectEntry = table.getEntry("rect");
 
+        System.out.println("VISION STUFF IS HAPPENING");
+
     }
 
     @Override
