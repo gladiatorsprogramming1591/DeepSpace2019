@@ -158,3 +158,9 @@ bin/
 
 # KDiff merge files
 *.orig
+
+# Build files
+build/
+
+# WPILib
+.wpilib/wpilib_preferences.json
