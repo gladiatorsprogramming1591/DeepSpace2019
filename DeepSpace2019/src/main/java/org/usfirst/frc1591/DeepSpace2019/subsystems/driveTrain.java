@@ -129,8 +129,8 @@ public class driveTrain extends Subsystem {
         mecanumDrive.drivePolar(speed, direction, rotation);
     }
 
-    public void standingRotation(double rotation){
-        mecanumDrive.driveCartesian(0, 0, rotation);
+    public void movingRotation(double strafe, double vertical, double rotation, double gyroDeg){
+        mecanumDrive.driveCartesian(strafe, vertical, rotation, gyroDeg);
     }
 
 
