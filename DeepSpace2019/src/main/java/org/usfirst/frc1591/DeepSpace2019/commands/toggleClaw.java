@@ -15,28 +15,24 @@ public class toggleClaw extends Command {
 
     @Override
     protected void initialize() {
-
+        setTimeout(1);
+        if (Robot.claw.clawOpen == true) { // checks to see if the claw is open.
+            Robot.claw.clawOpen = false;
+            Robot.claw.closeClaw();
+        } else {
+            Robot.claw.clawOpen = true;
+            Robot.claw.openClaw();
+        }   
     }
 
     @Override
     protected void execute() {
-        if (Robot.claw.clawOpenToggle && Robot.oi.manipulatorStick.getRawButton(6)) {
-            Robot.claw.clawOpenToggle = false; // Prevents the code from being called again until the Button is released and re-pressed
-            if (Robot.claw.clawOpen) { // checks to see if the claw is folded.
-                Robot.claw.clawOpen = false;
-                Robot.claw.closeClaw();
-            } else {
-                Robot.claw.clawOpen = true;
-                Robot.claw.openClaw();
-            }   
-        } else if (Robot.oi.manipulatorStick.getRawButton(6) == false) {
-            Robot.claw.clawOpenToggle = true; // Registers that the Button has been released and allows for the code to be run again.
-        }
+        
     }
 
     @Override
     protected boolean isFinished() {
-        return false;
+        return isTimedOut();
     }
 
     @Override
