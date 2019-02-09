@@ -57,9 +57,11 @@ public class driveManual extends Command {
     } else if (Robot.oi.driveStick.getRawButtonReleased(8)) {
         slow = false;
     }
-       //this does not handle joystick rotation, might need to add later
+        //this does not handle joystick rotation, might need to add later
         // m_rot = Robot.oi.driveStick.getRawAxis(2);
-
+    // move first two parts of if else statement after all the button checks and make it a separate block
+    // move the stop code after these two blocks
+    // move the rotate code to the end and make part of the if else for these three moved blocks 
         if((Robot.oi.driveStick.getMagnitude() > .05) && !slow && (m_rot == 0)){
             double strafe = Robot.oi.driveStick.getX();
             double vertical = Robot.oi.driveStick.getY();
@@ -81,8 +83,8 @@ public class driveManual extends Command {
                     m_targetArray = m_currentArray - 2;
                 }
                 m_rot = m_negRotation;
-                if(m_targetArray >= 8){
-                    System.out.println("ERROR: The angle array is greater than or equal to 8");
+                if(m_targetArray >= 8 || m_targetArray < 0){
+                    System.out.println("ERROR: The angle array is greater than or equal to 8 or less than 0");
                 }
                 m_target = Robot.driveTrain.Angles.get(m_targetArray);
         }   
@@ -95,8 +97,8 @@ public class driveManual extends Command {
                     m_targetArray = m_currentArray - 1;
                 }
                 m_rot = m_negRotation;
-                if(m_targetArray >= 8){
-                    System.out.println("ERROR: The angle array is greater than or equal to 8");
+                if(m_targetArray >= 8 || m_targetArray < 0){
+                    System.out.println("ERROR: The angle array is greater than or equal to 8 or less than 0");
                 }
                 m_target = Robot.driveTrain.Angles.get(m_targetArray);
         }   
@@ -109,8 +111,8 @@ public class driveManual extends Command {
                     m_targetArray = m_currentArray + 2;
                 }
                 m_rot = m_posRotation;
-                if(m_targetArray >= 8){
-                    System.out.println("ERROR: The angle array is greater than or equal to 8");
+                if(m_targetArray >= 8 || m_targetArray < 0){
+                    System.out.println("ERROR: The angle array is greater than or equal to 8 or less than 0");
                 }
                 m_target = Robot.driveTrain.Angles.get(m_targetArray);
         }   
@@ -123,8 +125,8 @@ public class driveManual extends Command {
                     m_targetArray = m_currentArray + 1;
                 }
                 m_rot = m_posRotation;
-                if(m_targetArray >= 8){
-                    System.out.println("ERROR: The angle array is greater than or equal to 8");
+                if(m_targetArray >= 8 || m_targetArray < 0){
+                    System.out.println("ERROR: The angle array is greater than or equal to 8 or less than 0");
                 }
                 m_target = Robot.driveTrain.Angles.get(m_targetArray);
         }   
