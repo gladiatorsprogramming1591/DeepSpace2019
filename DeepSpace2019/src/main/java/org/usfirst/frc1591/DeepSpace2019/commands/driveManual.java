@@ -47,34 +47,23 @@ public class driveManual extends Command {
         Robot.AHRS.reset();
     }
 
-        boolean slow;
+        boolean slow = false;
 
     // Called repeatedly when this Command is scheduled to run
     @Override
     protected void execute() {
-    if (Robot.oi.driveStick.getRawButtonPressed(8)) {
-        slow = true;
-    } else if (Robot.oi.driveStick.getRawButtonReleased(8)) {
-        slow = false;
+    if (Robot.oi.driveStick.getRawButton(9)) {
+        if (slow) {
+            slow = false;
+        }
+        else {
+            slow = true;
+        }
     }
+
         //this does not handle joystick rotation, might need to add later
         // m_rot = Robot.oi.driveStick.getRawAxis(2);
-    // move first two parts of if else statement after all the button checks and make it a separate block
-    // move the stop code after these two blocks
-    // move the rotate code to the end and make part of the if else for these three moved blocks 
-        if((Robot.oi.driveStick.getMagnitude() > .05) && !slow && (m_rot == 0)){
-            double strafe = Robot.oi.driveStick.getX();
-            double vertical = Robot.oi.driveStick.getY();
-            double gyroDeg = Robot.AHRS.getAngle();
-            Robot.driveTrain.fieldDrive(strafe, vertical, m_rot, gyroDeg);
-        }   
-        else if((Robot.oi.driveStick.getMagnitude() > .05) && slow && (m_rot == 0)){
-                double strafe = Robot.oi.driveStick.getX();
-                double vertical = Robot.oi.driveStick.getY();
-                double gyroDeg = Robot.AHRS.getAngle();
-                Robot.driveTrain.slowfieldDrive(strafe, vertical, m_rot, gyroDeg);
-        }
-         else if(Robot.oi.driveStick.getRawButton(5)){ //counter clockwise rocket angle
+        if(Robot.oi.driveStick.getRawButton(5)){ //counter clockwise rocket angle
                 if((m_currentArray == 0) || (m_currentArray == 1)){ //if 0 or 1, needs to be manually reset to bottom of array
                     m_targetArray = 7;
                 } else if((m_currentArray % 2 == 0)) { //if even and not 0
@@ -130,19 +119,32 @@ public class driveManual extends Command {
                 }
                 m_target = Robot.driveTrain.Angles.get(m_targetArray);
         }   
-        else if (m_rot != 0){ //if rotating (main rotate)
+
+        if((Robot.oi.driveStick.getMagnitude() > .05) && !slow && (m_rot == 0)){
             double strafe = Robot.oi.driveStick.getX();
             double vertical = Robot.oi.driveStick.getY();
             double gyroDeg = Robot.AHRS.getAngle();
-                Robot.driveTrain.movingRotation(strafe, vertical, m_rot, gyroDeg);;
-                if ((-1 < (m_target - Robot.AHRS.getYaw())) && ((m_target - Robot.AHRS.getYaw()) < 1)) {
-                    m_rot = 0;
-                    m_currentArray = m_targetArray;
-                }
+            Robot.driveTrain.fieldDrive(strafe, vertical, m_rot, gyroDeg);
         }   
+        else if((Robot.oi.driveStick.getMagnitude() > .05) && slow && (m_rot == 0)){
+                double strafe = Robot.oi.driveStick.getX();
+                double vertical = Robot.oi.driveStick.getY();
+                double gyroDeg = Robot.AHRS.getAngle();
+                Robot.driveTrain.slowfieldDrive(strafe, vertical, m_rot, gyroDeg);
+        }
         else if(Robot.oi.driveStick.getMagnitude() < .05 && (m_rot == 0)){
                     Robot.driveTrain.fieldDrive(0, 0, 0, 0);
             }
+        else if (m_rot != 0){ //if rotating (main rotate)
+                double strafe = Robot.oi.driveStick.getX();
+                double vertical = Robot.oi.driveStick.getY();
+                double gyroDeg = Robot.AHRS.getAngle();
+                    Robot.driveTrain.movingRotation(strafe, vertical, m_rot, gyroDeg);;
+                    if ((-1 < (m_target - Robot.AHRS.getYaw())) && ((m_target - Robot.AHRS.getYaw()) < 1)) {
+                        m_rot = 0;
+                        m_currentArray = m_targetArray;
+                    }
+            }   
     }
 
     // Make this return true when this Command no longer needs to run execute()
