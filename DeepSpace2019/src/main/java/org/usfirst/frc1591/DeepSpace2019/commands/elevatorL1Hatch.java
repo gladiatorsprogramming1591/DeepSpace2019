@@ -40,7 +40,7 @@ public class elevatorL1Hatch extends Command {
     protected void initialize() {
         // make the elevator move down
         if (Robot.elevator.getBottomSwitchState() == false){
-            Robot.elevator.Down();
+            Robot.elevator.down();
         }
     }
 

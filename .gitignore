@@ -164,3 +164,6 @@ build/
 
 # WPILib
 .wpilib/wpilib_preferences.json
+
+# Log directory (mostly for sim logs)
+logs/

@@ -41,7 +41,7 @@ public class elevatorCargoShip extends Command {
     protected void initialize() {
         // make the elevator move up
         if (Robot.elevator.getTopSwitchState() == false){
-            Robot.elevator.Up();
+            Robot.elevator.up();
         }
     }
 

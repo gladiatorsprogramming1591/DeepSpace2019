@@ -45,7 +45,6 @@ public class elevatorL2Hatch extends Command {
     // Called just before this Command runs the first time
     @Override
     protected void initialize() {
-        Robot.elevator.resetEncoder();
         direction = Robot.elevator.getdirection(3); // get direction and speed motor needs to move
         Robot.elevator.directionMove(direction);
     }
