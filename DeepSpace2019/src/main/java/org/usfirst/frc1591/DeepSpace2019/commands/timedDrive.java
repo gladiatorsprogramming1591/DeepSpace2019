@@ -47,7 +47,7 @@ public class timedDrive extends Command {
     // Called repeatedly when this Command is scheduled to run
     @Override
     protected void execute() {
-        if (Robot.oi.driveStick.getRawButton(2)){
+        if (Robot.oi.driveStick.getRawButtonPressed(2)){
             Robot.driveTrain.timedDrive(Robot.oi.driveStick.getMagnitude(),Robot.oi.driveStick.getDirectionDegrees(), Robot.oi.driveStick.getRawAxis(2));
 
         }
