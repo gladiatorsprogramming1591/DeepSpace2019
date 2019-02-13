@@ -37,11 +37,9 @@ public class toggleClaw extends Command {
 
     @Override
     protected void end() {
-        Robot.claw.disableClaw();
     }
 
     @Override
     protected void interrupted() {
-        end();
     }
 }

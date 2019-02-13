@@ -37,11 +37,9 @@ public class toggleClawFold extends Command { // toggles whether the claw is fol
 
     @Override
     protected void end() {
-        Robot.claw.disableClawFold();
     }
 
     @Override
     protected void interrupted() {
-        end();
     }
 }
