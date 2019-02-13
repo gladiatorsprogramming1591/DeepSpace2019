@@ -52,7 +52,7 @@ public class driveManual extends Command {
     // Called repeatedly when this Command is scheduled to run
     @Override
     protected void execute() {
-    if (Robot.oi.driveStick.getRawButton(9)) {
+    if (Robot.oi.driveStick.getRawButtonPressed(9)) {
         if (slow) {
             slow = false;
         }
@@ -63,7 +63,7 @@ public class driveManual extends Command {
 
         //this does not handle joystick rotation, might need to add later
         // m_rot = Robot.oi.driveStick.getRawAxis(2);
-        if(Robot.oi.driveStick.getRawButton(5)){ //counter clockwise rocket angle
+        if(Robot.oi.driveStick.getRawButtonPressed(5)){ //counter clockwise rocket angle
                 if((m_currentArray == 0) || (m_currentArray == 1)){ //if 0 or 1, needs to be manually reset to bottom of array
                     m_targetArray = 7;
                 } else if((m_currentArray % 2 == 0)) { //if even and not 0
@@ -77,7 +77,7 @@ public class driveManual extends Command {
                 }
                 m_target = Robot.driveTrain.Angles.get(m_targetArray);
         }   
-        else if(Robot.oi.driveStick.getRawButton(7)){ //counter clockwise right angles
+        else if(Robot.oi.driveStick.getRawButtonPressed(7)){ //counter clockwise right angles
                 if(m_currentArray == 0){ //if 0, needs to be manually reset to near bottom of array
                     m_targetArray = 6;
                 } else if(m_currentArray % 2 == 0) { //if even and not 0
@@ -91,7 +91,7 @@ public class driveManual extends Command {
                 }
                 m_target = Robot.driveTrain.Angles.get(m_targetArray);
         }   
-        else if(Robot.oi.driveStick.getRawButton(6)){ //clockwise rocket angle
+        else if(Robot.oi.driveStick.getRawButtonPressed(6)){ //clockwise rocket angle
                 if(m_currentArray == 7){ //if 7, needs to be manually reset to near top of array
                     m_targetArray = 1;
                 } else if(m_currentArray % 2 == 0 || m_currentArray == 0) { //if even or 0
@@ -105,12 +105,12 @@ public class driveManual extends Command {
                 }
                 m_target = Robot.driveTrain.Angles.get(m_targetArray);
         }   
-        else if(Robot.oi.driveStick.getRawButton(8)){ //clockwise right angles
+        else if(Robot.oi.driveStick.getRawButtonPressed(8)){ //clockwise right angles
                 if((m_currentArray == 6) || (m_currentArray == 7)){ //if 6 or 7, needs to be manually reset to top of array
                     m_targetArray = 0;
                 } else if(m_currentArray % 2 == 0) { //if even or 0 and not 6 
                     m_targetArray = m_currentArray + 2;
-                } else { //if odd and not 1
+                } else { //if odd and not 7
                     m_targetArray = m_currentArray + 1;
                 }
                 m_rot = m_posRotation;
