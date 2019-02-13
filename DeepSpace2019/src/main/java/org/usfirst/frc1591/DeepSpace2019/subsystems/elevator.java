@@ -55,6 +55,13 @@ public class elevator extends Subsystem {
 
     boolean state;
 
+    // Commmand variables
+    boolean finished = false;
+    int direction;
+
+    boolean limitSwitchState = false;
+    boolean distanceReached = false;
+
     // constants for the elevator stops, CURRENTLY PLACEHOLDERS
     int L1HATCH_POS = 250;
     int L1CARGO_POS = 500;
@@ -205,6 +212,43 @@ public class elevator extends Subsystem {
     //called when an elevator command is interrupted or ended
     public void stop(){
         elevatorMotor.set(0);
+    }
+
+    // Command methods
+
+    public void moveInit(int posIndex) {
+        distanceReached = false;
+        finished = false;
+
+        System.out.println("Moving to L2Hatch Position");
+        direction = getdirection(posIndex); // get direction and speed motor needs to move
+        directionMove(direction);
+        System.out.println("Motor moving in direction: " + direction);
+    }
+
+    public boolean moveIsFinished(int posIndex) {
+        // limitSwitchState = Robot.elevator.getSwitchesStates();
+
+        switch (direction) {
+            case 1:
+                if (getCurrentPos() >= getElevatorPositions(posIndex)) {
+                    distanceReached = true;
+                }
+                break;
+            case -1:
+                if (getCurrentPos() <= getElevatorPositions(posIndex)) {
+                    distanceReached = true;
+                }
+                break;
+            case 0:
+                distanceReached = true;
+        }
+        
+        if (/*limitSwitchState == true || */distanceReached == true) {
+            finished = true;
+            System.out.println("Motor stopping!");
+        }
+        return finished;
     }
 }
 
