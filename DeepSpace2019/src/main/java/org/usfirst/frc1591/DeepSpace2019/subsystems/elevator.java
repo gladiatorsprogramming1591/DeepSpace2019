@@ -227,8 +227,6 @@ public class elevator extends Subsystem {
     }
 
     public boolean moveIsFinished(int posIndex) {
-        // limitSwitchState = Robot.elevator.getSwitchesStates();
-
         switch (direction) {
             case 1:
                 if (getCurrentPos() >= getElevatorPositions(posIndex)) {
@@ -244,7 +242,7 @@ public class elevator extends Subsystem {
                 distanceReached = true;
         }
         
-        if (/*limitSwitchState == true || */distanceReached == true) {
+        if (distanceReached == true) {
             finished = true;
             System.out.println("Motor stopping!");
         }
