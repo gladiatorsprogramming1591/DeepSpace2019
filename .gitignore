@@ -165,3 +165,6 @@ build/
 
 #WPIlib
 .wpilib
+
+# Log files
+logs/
