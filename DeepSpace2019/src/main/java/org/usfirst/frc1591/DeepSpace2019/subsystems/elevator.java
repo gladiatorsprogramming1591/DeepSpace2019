@@ -17,8 +17,8 @@ public class elevator extends Subsystem {
     Encoder enc;
     ArrayList<Integer> elevatorPositions;
 
-    final double ELEVATOR_UP_SPEED = 0.5;
-    final double ELEVATOR_DOWN_SPEED = -0.5;
+    final double ELEVATOR_UP_SPEED = -1;
+    final double ELEVATOR_DOWN_SPEED = 1;
     boolean bottomState; // state true if bottom limit switch is pushed in
     boolean topState; // state true if top limit switch is pushed in
 
@@ -34,10 +34,9 @@ public class elevator extends Subsystem {
     boolean distanceReached = false;
 
     // Constants for the elevator stops, CURRENTLY PLACEHOLDERS
-    int L1HATCH_POS = 250;
-    int L1CARGO_POS = 500;
-    int CARGO_SHIP_POS = 750;
-    int L2HATCH_POS = 1000;
+    int L1HATCH_POS = 0;
+    int CARGO_SHIP_POS = 284;
+    int L2HATCH_POS = 630;
 
     public elevator() {
         elevatorTopSwitch = new DigitalInput(0);
@@ -66,7 +65,6 @@ public class elevator extends Subsystem {
 
         // Create array that holds the different stops on the elevator
         elevatorPositions.add(L1HATCH_POS);
-        elevatorPositions.add(L1CARGO_POS);
         elevatorPositions.add(CARGO_SHIP_POS);
         elevatorPositions.add(L2HATCH_POS);
     }
@@ -177,7 +175,7 @@ public class elevator extends Subsystem {
         distanceReached = false;
         finished = false;
 
-        System.out.println("Moving to L2Hatch Position");
+        System.out.println("Moving to position " + posIndex);
         direction = getdirection(posIndex); // get direction and speed motor needs to move
         directionMove(direction);
         System.out.println("Motor moving in direction: " + direction);

@@ -72,8 +72,7 @@ public class OI {
         SmartDashboard.putData("autoCommand", new autoCommand());
         SmartDashboard.putData("elevatorL2Hatch", new elevatorL2Hatch());
         SmartDashboard.putData("elevatorL1Hatch", new elevatorL1Hatch());
-        SmartDashboard.putData("elevatorL1Cargo", new elevatorL1Cargo());
-        SmartDashboard.putData("elevatorCargoShip", new elevatorCargoShip());
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                SmartDashboard.putData("elevatorCargoShip", new elevatorCargoShip());
         SmartDashboard.putData("driveManual", new driveManual());
         SmartDashboard.putData("clawOpen", new clawOpen());
         SmartDashboard.putData("clawClose", new clawClose());

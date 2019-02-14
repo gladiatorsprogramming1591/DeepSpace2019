@@ -4,7 +4,7 @@ import org.usfirst.frc1591.DeepSpace2019.Robot;
 
 public class elevatorL2Hatch extends Command {
 
-    int posIndex = 3;
+    int posIndex = 2;
 
     public elevatorL2Hatch() {
         requires(Robot.elevator);

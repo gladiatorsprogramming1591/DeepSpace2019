@@ -4,7 +4,7 @@ import org.usfirst.frc1591.DeepSpace2019.Robot;
 
 public class elevatorCargoShip extends Command {
 
-    int posIndex = 2;
+    int posIndex = 1;
     
     public elevatorCargoShip() {
         requires(Robot.elevator);
