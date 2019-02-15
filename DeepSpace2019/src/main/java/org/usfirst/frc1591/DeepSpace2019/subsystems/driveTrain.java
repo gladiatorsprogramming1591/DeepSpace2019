@@ -133,7 +133,6 @@ public class driveTrain extends Subsystem {
         mecanumDrive.driveCartesian(strafe, vertical, rotation, gyroDeg);
     }
 
-
     // watch for changing rotation divisor and slow speed divisors
 }
 
