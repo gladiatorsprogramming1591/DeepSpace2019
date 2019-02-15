@@ -225,7 +225,7 @@ public final class Main{
   	 * This is the primary method that runs the entire pipeline and updates the outputs.
   	 */
   	public void process(Mat source0) {
-      System.out.println("Processing 3...");
+      System.out.println("Processing 5...");
   		// Step HSL_Threshold0:
   		Mat hslThresholdInput = source0;
   		double[] hslThresholdHue = {0.0, 180.0};
