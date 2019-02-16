@@ -11,6 +11,7 @@
 
 package org.usfirst.frc1591.DeepSpace2019.commands;
 import edu.wpi.first.wpilibj.command.Command;
+
 import org.usfirst.frc1591.DeepSpace2019.Robot;
 
 /**
@@ -44,7 +45,6 @@ public class driveManual extends Command {
     // Called just before this Command runs the first time
     @Override
     protected void initialize() {
-        Robot.AHRS.reset();
     }
 
         boolean slow = false;

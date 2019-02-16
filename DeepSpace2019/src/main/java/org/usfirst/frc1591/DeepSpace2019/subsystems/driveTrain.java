@@ -12,6 +12,7 @@
 package org.usfirst.frc1591.DeepSpace2019.subsystems;
 
 
+import org.usfirst.frc1591.DeepSpace2019.Robot;
 import org.usfirst.frc1591.DeepSpace2019.commands.*;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -91,6 +92,7 @@ public class driveTrain extends Subsystem {
     Angles.add(-90.0); //6
     Angles.add(-28.75); //7
 
+    Robot.AHRS.reset();
     }
 
     @Override
