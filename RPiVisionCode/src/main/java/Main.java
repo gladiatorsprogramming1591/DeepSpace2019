@@ -412,7 +412,8 @@ public final class Main{
 
           // send rectangle object outputted by pipeline to network tables
           NetworkTableEntry rectEntry = table.getEntry("rect");
-          rectEntry.setValue(r);
+          // rectEntry.setValue(r);
+          System.out.println("visionThread: sending rect");
 
           //example of how to pull out in robot code
           // Rect getR = (Rect)rectEntry.getValue().getValue();
