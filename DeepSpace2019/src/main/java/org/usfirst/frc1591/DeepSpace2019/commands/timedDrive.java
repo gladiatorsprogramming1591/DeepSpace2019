@@ -62,8 +62,7 @@ public class timedDrive extends Command {
                 doneRotating = true;
                 Robot.driveTrain.timedDrive(m_magnitude, m_direction, 0);
             }
-        }
-        isFinished = true;
+        } else isFinished = true;
     }
 
     // Make this return true when this Command no longer needs to run execute()

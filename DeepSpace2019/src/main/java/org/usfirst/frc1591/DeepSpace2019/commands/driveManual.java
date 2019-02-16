@@ -118,33 +118,33 @@ public class driveManual extends Command {
                     System.out.println("ERROR: The angle array is greater than or equal to 8 or less than 0");
                 }
                 m_target = Robot.driveTrain.Angles.get(m_targetArray);
-        }   
+        }
 
-        if((Robot.oi.driveStick.getMagnitude() > .05) && !slow && (m_rot == 0)){
+        if((Robot.oi.driveStick.getMagnitude() > .05) && !slow && (m_rot == 0)){ //standard field oriented driving
             double strafe = Robot.oi.driveStick.getX();
-            double vertical = Robot.oi.driveStick.getY();
+            double vertical = -Robot.oi.driveStick.getY();
             double gyroDeg = Robot.AHRS.getAngle();
             Robot.driveTrain.fieldDrive(strafe, vertical, m_rot, gyroDeg);
         }   
-        else if((Robot.oi.driveStick.getMagnitude() > .05) && slow && (m_rot == 0)){
+        else if((Robot.oi.driveStick.getMagnitude() > .05) && slow && (m_rot == 0)){ //slow driving
                 double strafe = Robot.oi.driveStick.getX();
-                double vertical = Robot.oi.driveStick.getY();
+                double vertical = -Robot.oi.driveStick.getY();
                 double gyroDeg = Robot.AHRS.getAngle();
                 Robot.driveTrain.slowfieldDrive(strafe, vertical, m_rot, gyroDeg);
         }
-        else if(Robot.oi.driveStick.getMagnitude() < .05 && (m_rot == 0)){
+        else if(Robot.oi.driveStick.getMagnitude() < .05 && (m_rot == 0)){ //no movement to fix error readouts
                     Robot.driveTrain.fieldDrive(0, 0, 0, 0);
-            }
+        }
         else if (m_rot != 0){ //if rotating (main rotate)
                 double strafe = Robot.oi.driveStick.getX();
-                double vertical = Robot.oi.driveStick.getY();
+                double vertical = -Robot.oi.driveStick.getY();
                 double gyroDeg = Robot.AHRS.getAngle();
                     Robot.driveTrain.movingRotation(strafe, vertical, m_rot, gyroDeg);;
                     if ((-1 < (m_target - Robot.AHRS.getYaw())) && ((m_target - Robot.AHRS.getYaw()) < 1)) {
                         m_rot = 0;
                         m_currentArray = m_targetArray;
                     }
-            }   
+        }   
     }
 
     // Make this return true when this Command no longer needs to run execute()
