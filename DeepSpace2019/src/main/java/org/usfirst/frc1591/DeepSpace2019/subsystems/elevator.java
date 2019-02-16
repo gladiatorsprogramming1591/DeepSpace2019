@@ -17,8 +17,8 @@ public class elevator extends Subsystem {
     Encoder enc;
     ArrayList<Integer> elevatorPositions;
 
-    final double ELEVATOR_UP_SPEED = -1;
-    final double ELEVATOR_DOWN_SPEED = 1;
+    final double ELEVATOR_UP_SPEED = -0.7;
+    final double ELEVATOR_DOWN_SPEED = 0.4;
     boolean bottomState; // state true if bottom limit switch is pushed in
     boolean topState; // state true if top limit switch is pushed in
 
@@ -78,13 +78,14 @@ public class elevator extends Subsystem {
     @Override
     public void periodic() {
         // This code is run every loop
-        if (elevatorMotor.get() > 0 && getTopSwitchState() == true) {
+        if (elevatorMotor.get() < 0 && getTopSwitchState() == true) {
             stop();
             System.out.println("Top switch pressed. ABORT ABORT ABORT");
         }
-        else if(elevatorMotor.get() < 0 && getBottomSwitchState() == true) {
+        else if(elevatorMotor.get() >= 0 && getBottomSwitchState() == true) {
             stop();
-            System.out.println("Bottom switch pressed. ABORT ABORT ABORT");
+            enc.reset();
+            // System.out.println("Bottom switch pressed. ABORT ABORT ABORT");
         }
     }
 
