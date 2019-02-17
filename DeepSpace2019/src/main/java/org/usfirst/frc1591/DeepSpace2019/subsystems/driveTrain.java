@@ -66,11 +66,11 @@ public class driveTrain extends Subsystem {
         
         
         
-        mecanumDrive = new MecanumDrive(lFmotor, rFmotor,
-              lBmotor, rBmotor);
+        mecanumDrive = new MecanumDrive(lFmotor, lBmotor,
+              rFmotor, rBmotor);
         addChild("mecanumDrive",mecanumDrive);
         mecanumDrive.setSafetyEnabled(true);
-        mecanumDrive.setExpiration(0.1);
+        mecanumDrive.setExpiration(0.5);
         mecanumDrive.setMaxOutput(1.0);
 
         

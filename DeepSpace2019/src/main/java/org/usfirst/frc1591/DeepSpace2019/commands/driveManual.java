@@ -52,14 +52,14 @@ public class driveManual extends Command {
     // Called repeatedly when this Command is scheduled to run
     @Override
     protected void execute() {
-    if (Robot.oi.driveStick.getRawButtonPressed(9)) {
-        if (slow) {
-            slow = false;
+        if (Robot.oi.driveStick.getRawButtonPressed(9)) {
+            if (slow) {
+                slow = false;
+            }
+            else {
+                slow = true;
+            }
         }
-        else {
-            slow = true;
-        }
-    }
 
         //this does not handle joystick rotation, might need to add later
         // m_rot = Robot.oi.driveStick.getRawAxis(2);
@@ -122,7 +122,7 @@ public class driveManual extends Command {
 
         if((Robot.oi.driveStick.getMagnitude() > .05) && !slow && (m_rot == 0)){ //standard field oriented driving
             double strafe = Robot.oi.driveStick.getX();
-            double vertical = -Robot.oi.driveStick.getY();
+            double vertical = Robot.oi.driveStick.getY();
             double gyroDeg = Robot.AHRS.getAngle();
             Robot.driveTrain.fieldDrive(strafe, vertical, m_rot, gyroDeg);
         }   
@@ -139,11 +139,11 @@ public class driveManual extends Command {
                 double strafe = Robot.oi.driveStick.getX();
                 double vertical = -Robot.oi.driveStick.getY();
                 double gyroDeg = Robot.AHRS.getAngle();
-                    Robot.driveTrain.movingRotation(strafe, vertical, m_rot, gyroDeg);;
-                    if ((-1 < (m_target - Robot.AHRS.getYaw())) && ((m_target - Robot.AHRS.getYaw()) < 1)) {
-                        m_rot = 0;
-                        m_currentArray = m_targetArray;
-                    }
+                Robot.driveTrain.movingRotation(strafe, vertical, m_rot, gyroDeg);;
+                if ((-1 < (m_target - Robot.AHRS.getYaw())) && ((m_target - Robot.AHRS.getYaw()) < 1)) {
+                    m_rot = 0;
+                    m_currentArray = m_targetArray;
+                }
         }   
     }
 
