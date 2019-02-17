@@ -167,3 +167,6 @@ build/
 
 # Log directory (mostly for sim logs)
 logs/
+
+# KDiff merge files
+*.orig
