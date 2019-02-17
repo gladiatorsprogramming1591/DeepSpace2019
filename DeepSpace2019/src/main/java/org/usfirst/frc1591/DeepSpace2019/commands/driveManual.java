@@ -122,9 +122,9 @@ public class driveManual extends Command {
 
         if((Robot.oi.driveStick.getMagnitude() > .05) && !slow && (m_rot == 0)){ //standard field oriented driving
             double strafe = Robot.oi.driveStick.getX();
-            double vertical = Robot.oi.driveStick.getY();
+            double vertical = -Robot.oi.driveStick.getY();
             double gyroDeg = Robot.AHRS.getAngle();
-            Robot.driveTrain.fieldDrive(strafe, vertical, m_rot, gyroDeg);
+            Robot.driveTrain.fieldDrive(strafe, vertical, m_rot, 0);
         }   
         else if((Robot.oi.driveStick.getMagnitude() > .05) && slow && (m_rot == 0)){ //slow driving
                 double strafe = Robot.oi.driveStick.getX();
