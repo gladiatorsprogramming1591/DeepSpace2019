@@ -1,0 +1,58 @@
+!!com.snobot.simulator.config.v1.SimulatorConfigV1
+mAccelerometers: []
+mAnalogIn:
+- mHandle: 0
+  mName: Analog In 0
+  mType: com.snobot.simulator.module_wrapper.wpi.WpiAnalogInWrapper
+mAnalogOut: []
+mDefaultI2CWrappers: {}
+mDefaultSpiWrappers: {}
+mDigitalIO:
+- mHandle: 0
+  mName: elevatorTopSwitch
+  mType: com.snobot.simulator.module_wrapper.wpi.WpiDigitalIoWrapper
+- mHandle: 1
+  mName: elevatorBottomSwitch
+  mType: com.snobot.simulator.module_wrapper.wpi.WpiDigitalIoWrapper
+- mHandle: 2
+  mName: Digital IO 2
+  mType: com.snobot.simulator.module_wrapper.wpi.WpiDigitalIoWrapper
+- mHandle: 3
+  mName: Digital IO 3
+  mType: com.snobot.simulator.module_wrapper.wpi.WpiDigitalIoWrapper
+mEncoders:
+- mConnectedSpeedControllerHandle: 1
+  mHandle: 0
+  mName: Encoder
+  mType: com.snobot.simulator.module_wrapper.wpi.WpiEncoderWrapper
+mGyros: []
+mPwm:
+- mHandle: 1
+  mMotorModelConfig: null
+  mMotorSimConfig: !!com.snobot.simulator.motor_sim.SimpleMotorSimulationConfig
+    mMaxSpeed: 0.0
+  mName: elevatorMotor
+  mType: com.snobot.simulator.module_wrapper.wpi.WpiPwmWrapper
+- mHandle: 100
+  mMotorModelConfig: null
+  mMotorSimConfig: null
+  mName: CAN SC 0
+  mType: com.snobot.simulator.simulator_components.ctre.CtreTalonSrxSpeedControllerSim
+- mHandle: 101
+  mMotorModelConfig: null
+  mMotorSimConfig: null
+  mName: CAN SC 1
+  mType: com.snobot.simulator.simulator_components.ctre.CtreTalonSrxSpeedControllerSim
+- mHandle: 102
+  mMotorModelConfig: null
+  mMotorSimConfig: null
+  mName: CAN SC 2
+  mType: com.snobot.simulator.simulator_components.ctre.CtreTalonSrxSpeedControllerSim
+- mHandle: 103
+  mMotorModelConfig: null
+  mMotorSimConfig: null
+  mName: CAN SC 3
+  mType: com.snobot.simulator.simulator_components.ctre.CtreTalonSrxSpeedControllerSim
+mRelays: []
+mSimulatorComponents: []
+mSolenoids: []
