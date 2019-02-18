@@ -79,8 +79,8 @@ public class lift extends Subsystem {
         backPistons.set(DoubleSolenoid.Value.kOff);
     }
     
-    public void turnWheel() {
-        liftMotor.set(.6); //assumes positive is forward
+    public void turnWheel(double speed) {
+        liftMotor.set(speed); //assumes positive is forward
     }
    
     public void stopWheel(){

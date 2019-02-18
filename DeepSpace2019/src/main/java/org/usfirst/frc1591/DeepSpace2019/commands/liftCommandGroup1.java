@@ -49,7 +49,7 @@ public class liftCommandGroup1 extends CommandGroup {
     addSequential(new liftRear());
     addSequential(new timedliftDrive(1.5));
     addSequential(new unliftRear());
-    addSequential(new timedDrive(1,4,0,0.6));
+    addSequential(new timedDriveNoRotate(1,0.5));
  
     } 
 }
