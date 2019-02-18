@@ -83,6 +83,11 @@ public class lift extends Subsystem {
         liftMotor.set(speed); //assumes positive is forward
     }
    
+    public void liftFrontAndDrive(double speed) {
+        liftFront();
+        turnWheel(speed);
+    }
+    
     public void stopWheel(){
         liftMotor.set(0);
     }
