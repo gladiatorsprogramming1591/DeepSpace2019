@@ -60,13 +60,13 @@ public class driveTrain extends Subsystem {
         //even index = right angles
         //odd index = rocket angles
         Angles.add(0.0); //0
-        Angles.add(-28.75); //1
-        Angles.add(-90.0); //2
-        Angles.add(-151.25); //3
+        Angles.add(28.75); //1
+        Angles.add(90.0); //2
+        Angles.add(151.25); //3
         Angles.add(180.0); //4
-        Angles.add(151.25); //5
-        Angles.add(90.0); //6
-        Angles.add(28.75); //7
+        Angles.add(-151.25); //5
+        Angles.add(-90.0); //6
+        Angles.add(-28.75); //7
 
         Robot.AHRS.reset();
     }
@@ -104,28 +104,33 @@ public class driveTrain extends Subsystem {
         double rotation = 0;
         double current = Robot.AHRS.getYaw();
 
-        // if equal to target angle with offset
-        if (Math.abs(targetAngle_ - current) < OFFSET) {
-            rotation = 0;
+        if (Robot.oi.driveStick.getX() != 0){
+            rotation = Robot.oi.driveStick.getX();
         }
         else {
-            // move in the direction we need to get there
-            if (current >= 0){
-                double temp = current -180;
-                if(temp < targetAngle_ && targetAngle_ < current){
-                    rotation = -1;
-                } 
-                else {
-                    rotation = 1;
-                }
-            } 
+            // if equal to target angle with offset
+            if (Math.abs(targetAngle_ - current) < OFFSET) {
+                rotation = 0;
+            }
             else {
-                double temp = current + 180;
-                if (current < targetAngle_ && targetAngle_ < temp){
-                    rotation = 1;
+                // move in the direction we need to get there
+                if (current >= 0){
+                    double temp = current -180;
+                    if(temp < targetAngle_ && targetAngle_ < current){
+                        rotation = -1;
+                    } 
+                    else {
+                        rotation = 1;
+                    }
                 } 
                 else {
-                    rotation = -1;
+                    double temp = current + 180;
+                    if (current < targetAngle_ && targetAngle_ < temp){
+                        rotation = 1;
+                    } 
+                    else {
+                        rotation = -1;
+                    }
                 }
             }
         }

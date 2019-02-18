@@ -5,7 +5,16 @@ import org.usfirst.frc1591.DeepSpace2019.Robot;
 
 public class driveManualExp extends Command {
 
+    double targetAngle = 0;
+    double currentPOV = 0;
+
     public driveManualExp() {
+        targetAngle = 0;
+        requires(Robot.driveTrain);
+    }
+
+    public driveManualExp(double target) {
+        targetAngle = target;
         requires(Robot.driveTrain);
     }
 
@@ -19,11 +28,10 @@ public class driveManualExp extends Command {
     @Override
     protected void execute() {
         
-        double strafe = Robot.oi.driveStick.getX();
-        double vertical = -Robot.oi.driveStick.getY();
+        double strafe = Robot.oi.driveStick.getRawAxis(2);
+        double vertical = -Robot.oi.driveStick.getRawAxis(3);
         double gyroDeg = Robot.AHRS.getAngle();
-        double targetAngle = 0;
-        double currentPOV = 0;
+
 
         if (Robot.oi.driveStick.getPOV() != currentPOV && Robot.oi.driveStick.getPOV()!= -1){
             int targetIndex = Robot.oi.driveStick.getPOV() / 45;
