@@ -3,9 +3,9 @@ import edu.wpi.first.wpilibj.command.Command;
 
 import org.usfirst.frc1591.DeepSpace2019.Robot;
 
-public class driveManual extends Command {
+public class driveManualExp extends Command {
 
-    public driveManual() {
+    public driveManualExp() {
         requires(Robot.driveTrain);
     }
 
@@ -18,11 +18,20 @@ public class driveManual extends Command {
     // Called repeatedly when this Command is scheduled to run
     @Override
     protected void execute() {
-            double strafe = Robot.oi.driveStick.getX();
-            double vertical = -Robot.oi.driveStick.getY();
-            double rotation = Robot.oi.driveStick.getRawAxis(2);
-            double gyroDeg = Robot.AHRS.getAngle();
-            Robot.driveTrain.fieldDrive(strafe, vertical, rotation , -gyroDeg);
+        
+        double strafe = Robot.oi.driveStick.getX();
+        double vertical = -Robot.oi.driveStick.getY();
+        double gyroDeg = Robot.AHRS.getAngle();
+        double targetAngle = 0;
+        double currentPOV = 0;
+
+        if (Robot.oi.driveStick.getPOV() != currentPOV && Robot.oi.driveStick.getPOV()!= -1){
+            int targetIndex = Robot.oi.driveStick.getPOV() / 45;
+            targetAngle = Robot.driveTrain.Angles.get(targetIndex);
+            currentPOV = targetIndex * 45;
+        }
+
+        Robot.driveTrain.rotateToPos(strafe, vertical, gyroDeg, targetAngle);
     }
 
     // Make this return true when this Command no longer needs to run execute()
