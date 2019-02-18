@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.PIDOutput;
 import edu.wpi.first.wpilibj.PIDSource;
 import edu.wpi.first.wpilibj.Spark;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -83,9 +84,12 @@ public class lift extends Subsystem {
         liftMotor.set(0);
     }
     
-    public void checkPneumatics(){
-        if (rearExtended){
-            turnWheel(); 
+    public boolean checkPneumatics(){
+        if (frontPistons.get() == Value.kForward || backPistons.get() == Value.kForward) {
+            return true;
+        } 
+        else {
+            return false;
         }
     }
 

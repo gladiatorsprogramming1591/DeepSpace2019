@@ -27,19 +27,20 @@ public class driveManualExp extends Command {
     // Called repeatedly when this Command is scheduled to run
     @Override
     protected void execute() {
+        if (!Robot.lift.checkPneumatics()) {
+            double strafe = Robot.oi.driveStick.getRawAxis(2);
+            double vertical = -Robot.oi.driveStick.getRawAxis(3);
+            double gyroDeg = Robot.AHRS.getAngle();
+            
+            
+            if (Robot.oi.driveStick.getPOV() != currentPOV && Robot.oi.driveStick.getPOV()!= -1){
+                int targetIndex = Robot.oi.driveStick.getPOV() / 45;
+                targetAngle = Robot.driveTrain.Angles.get(targetIndex);
+                currentPOV = targetIndex * 45;
+            }
         
-        double strafe = Robot.oi.driveStick.getRawAxis(2);
-        double vertical = -Robot.oi.driveStick.getRawAxis(3);
-        double gyroDeg = Robot.AHRS.getAngle();
-
-
-        if (Robot.oi.driveStick.getPOV() != currentPOV && Robot.oi.driveStick.getPOV()!= -1){
-            int targetIndex = Robot.oi.driveStick.getPOV() / 45;
-            targetAngle = Robot.driveTrain.Angles.get(targetIndex);
-            currentPOV = targetIndex * 45;
+            Robot.driveTrain.rotateToPos(strafe, vertical, gyroDeg, targetAngle);
         }
-
-        Robot.driveTrain.rotateToPos(strafe, vertical, gyroDeg, targetAngle);
     }
 
     // Make this return true when this Command no longer needs to run execute()
