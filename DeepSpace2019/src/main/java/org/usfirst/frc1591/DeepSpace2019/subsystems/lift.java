@@ -1,6 +1,7 @@
 package org.usfirst.frc1591.DeepSpace2019.subsystems;
 import org.usfirst.frc1591.DeepSpace2019.commands.*;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.PIDOutput;
 import edu.wpi.first.wpilibj.PIDSource;
@@ -28,7 +29,7 @@ public class lift extends Subsystem {
         
         liftMotor = new Spark(0);
         addChild("liftMotor",liftMotor);
-        liftMotor.setInverted(false);
+        liftMotor.setInverted(true);
 
         frontRangeFinder = new AnalogInput(1);
         addChild("frontRangeFinder",frontRangeFinder);
@@ -47,6 +48,8 @@ public class lift extends Subsystem {
 
     @Override
     public void periodic() {
+        SmartDashboard.putNumber("frontHeight", getFrontHeight());
+        SmartDashboard.putNumber("rearHeight", getRearHeight());
     }
 
     public boolean frontExtended = false;
@@ -90,7 +93,6 @@ public class lift extends Subsystem {
         } 
         else {
             return false;
-        }
     }
 
     public double getFrontHeight(){
