@@ -4,8 +4,14 @@ import org.usfirst.frc1591.DeepSpace2019.Robot;
 
 public class timedliftDrive extends Command {
     double m_timeout = 2.0;
+    double m_speed = 0.7;
     
     public timedliftDrive(double time) {
+        requires(Robot.lift);
+        m_timeout = time;
+    }
+
+    public timedliftDrive(double time, double speed) {
         requires(Robot.lift);
         m_timeout = time;
     }
@@ -13,7 +19,7 @@ public class timedliftDrive extends Command {
     @Override
     protected void initialize() {
         setTimeout(m_timeout);
-        Robot.lift.turnWheel();
+        Robot.lift.turnWheel(m_speed);
     }
 
     @Override
