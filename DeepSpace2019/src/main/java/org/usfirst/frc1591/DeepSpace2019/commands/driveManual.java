@@ -52,99 +52,100 @@ public class driveManual extends Command {
     // Called repeatedly when this Command is scheduled to run
     @Override
     protected void execute() {
-        if (Robot.oi.driveStick.getRawButtonPressed(9)) {
-            if (slow) {
-                slow = false;
-            }
-            else {
-                slow = true;
-            }
-        }
+        // if (Robot.oi.driveStick.getRawButtonPressed(9)) {
+        //     if (slow) {
+        //         slow = false;
+        //     }
+        //     else {
+        //         slow = true;
+        //     }
+        // }
 
-        //this does not handle joystick rotation, might need to add later
-        // m_rot = Robot.oi.driveStick.getRawAxis(2);
-        if(Robot.oi.driveStick.getRawButtonPressed(5)){ //counter clockwise rocket angle
-                if((m_currentArray == 0) || (m_currentArray == 1)){ //if 0 or 1, needs to be manually reset to bottom of array
-                    m_targetArray = 7;
-                } else if((m_currentArray % 2 == 0)) { //if even and not 0
-                    m_targetArray = m_currentArray - 1;
-                } else { //if odd and not 1
-                    m_targetArray = m_currentArray - 2;
-                }
-                m_rot = m_negRotation;
-                if(m_targetArray >= 8 || m_targetArray < 0){
-                    System.out.println("ERROR: The angle array is greater than or equal to 8 or less than 0");
-                }
-                m_target = Robot.driveTrain.Angles.get(m_targetArray);
-        }   
-        else if(Robot.oi.driveStick.getRawButtonPressed(7)){ //counter clockwise right angles
-                if(m_currentArray == 0){ //if 0, needs to be manually reset to near bottom of array
-                    m_targetArray = 6;
-                } else if(m_currentArray % 2 == 0) { //if even and not 0
-                    m_targetArray = m_currentArray - 2;
-                } else { //if odd 
-                    m_targetArray = m_currentArray - 1;
-                }
-                m_rot = m_negRotation;
-                if(m_targetArray >= 8 || m_targetArray < 0){
-                    System.out.println("ERROR: The angle array is greater than or equal to 8 or less than 0");
-                }
-                m_target = Robot.driveTrain.Angles.get(m_targetArray);
-        }   
-        else if(Robot.oi.driveStick.getRawButtonPressed(6)){ //clockwise rocket angle
-                if(m_currentArray == 7){ //if 7, needs to be manually reset to near top of array
-                    m_targetArray = 1;
-                } else if(m_currentArray % 2 == 0 || m_currentArray == 0) { //if even or 0
-                    m_targetArray = m_currentArray + 1;
-                } else { //if odd and not 7
-                    m_targetArray = m_currentArray + 2;
-                }
-                m_rot = m_posRotation;
-                if(m_targetArray >= 8 || m_targetArray < 0){
-                    System.out.println("ERROR: The angle array is greater than or equal to 8 or less than 0");
-                }
-                m_target = Robot.driveTrain.Angles.get(m_targetArray);
-        }   
-        else if(Robot.oi.driveStick.getRawButtonPressed(8)){ //clockwise right angles
-                if((m_currentArray == 6) || (m_currentArray == 7)){ //if 6 or 7, needs to be manually reset to top of array
-                    m_targetArray = 0;
-                } else if(m_currentArray % 2 == 0) { //if even or 0 and not 6 
-                    m_targetArray = m_currentArray + 2;
-                } else { //if odd and not 7
-                    m_targetArray = m_currentArray + 1;
-                }
-                m_rot = m_posRotation;
-                if(m_targetArray >= 8 || m_targetArray < 0){
-                    System.out.println("ERROR: The angle array is greater than or equal to 8 or less than 0");
-                }
-                m_target = Robot.driveTrain.Angles.get(m_targetArray);
-        }
+        // //this does not handle joystick rotation, might need to add later
+        // // m_rot = Robot.oi.driveStick.getRawAxis(2);
+        // if(Robot.oi.driveStick.getRawButtonPressed(5)){ //counter clockwise rocket angle
+        //         if((m_currentArray == 0) || (m_currentArray == 1)){ //if 0 or 1, needs to be manually reset to bottom of array
+        //             m_targetArray = 7;
+        //         } else if((m_currentArray % 2 == 0)) { //if even and not 0
+        //             m_targetArray = m_currentArray - 1;
+        //         } else { //if odd and not 1
+        //             m_targetArray = m_currentArray - 2;
+        //         }
+        //         m_rot = m_negRotation;
+        //         if(m_targetArray >= 8 || m_targetArray < 0){
+        //             System.out.println("ERROR: The angle array is greater than or equal to 8 or less than 0");
+        //         }
+        //         m_target = Robot.driveTrain.Angles.get(m_targetArray);
+        // }   
+        // else if(Robot.oi.driveStick.getRawButtonPressed(7)){ //counter clockwise right angles
+        //         if(m_currentArray == 0){ //if 0, needs to be manually reset to near bottom of array
+        //             m_targetArray = 6;
+        //         } else if(m_currentArray % 2 == 0) { //if even and not 0
+        //             m_targetArray = m_currentArray - 2;
+        //         } else { //if odd 
+        //             m_targetArray = m_currentArray - 1;
+        //         }
+        //         m_rot = m_negRotation;
+        //         if(m_targetArray >= 8 || m_targetArray < 0){
+        //             System.out.println("ERROR: The angle array is greater than or equal to 8 or less than 0");
+        //         }
+        //         m_target = Robot.driveTrain.Angles.get(m_targetArray);
+        // }   
+        // else if(Robot.oi.driveStick.getRawButtonPressed(6)){ //clockwise rocket angle
+        //         if(m_currentArray == 7){ //if 7, needs to be manually reset to near top of array
+        //             m_targetArray = 1;
+        //         } else if(m_currentArray % 2 == 0 || m_currentArray == 0) { //if even or 0
+        //             m_targetArray = m_currentArray + 1;
+        //         } else { //if odd and not 7
+        //             m_targetArray = m_currentArray + 2;
+        //         }
+        //         m_rot = m_posRotation;
+        //         if(m_targetArray >= 8 || m_targetArray < 0){
+        //             System.out.println("ERROR: The angle array is greater than or equal to 8 or less than 0");
+        //         }
+        //         m_target = Robot.driveTrain.Angles.get(m_targetArray);
+        // }   
+        // else if(Robot.oi.driveStick.getRawButtonPressed(8)){ //clockwise right angles
+        //         if((m_currentArray == 6) || (m_currentArray == 7)){ //if 6 or 7, needs to be manually reset to top of array
+        //             m_targetArray = 0;
+        //         } else if(m_currentArray % 2 == 0) { //if even or 0 and not 6 
+        //             m_targetArray = m_currentArray + 2;
+        //         } else { //if odd and not 7
+        //             m_targetArray = m_currentArray + 1;
+        //         }
+        //         m_rot = m_posRotation;
+        //         if(m_targetArray >= 8 || m_targetArray < 0){
+        //             System.out.println("ERROR: The angle array is greater than or equal to 8 or less than 0");
+        //         }
+        //         m_target = Robot.driveTrain.Angles.get(m_targetArray);
+        // }
 
-        if((Robot.oi.driveStick.getMagnitude() > .05) && !slow && (m_rot == 0)){ //standard field oriented driving
+        // if((Robot.oi.driveStick.getMagnitude() > .05) && !slow && (m_rot == 0)){ //standard field oriented driving
             double strafe = Robot.oi.driveStick.getX();
             double vertical = -Robot.oi.driveStick.getY();
+            double rotation = Robot.oi.driveStick.getRawAxis(2);
             double gyroDeg = Robot.AHRS.getAngle();
-            Robot.driveTrain.fieldDrive(strafe, vertical, m_rot, 0);
-        }   
-        else if((Robot.oi.driveStick.getMagnitude() > .05) && slow && (m_rot == 0)){ //slow driving
-                double strafe = Robot.oi.driveStick.getX();
-                double vertical = -Robot.oi.driveStick.getY();
-                double gyroDeg = Robot.AHRS.getAngle();
-                Robot.driveTrain.slowfieldDrive(strafe, vertical, m_rot, gyroDeg);
-        }
-        else if(Robot.oi.driveStick.getMagnitude() < .05 && (m_rot == 0)){ //no movement to fix error readouts
-                    Robot.driveTrain.fieldDrive(0, 0, 0, 0);
-        }
-        else if (m_rot != 0){ //if rotating (main rotate)
-                double strafe = Robot.oi.driveStick.getX();
-                double vertical = -Robot.oi.driveStick.getY();
-                double gyroDeg = Robot.AHRS.getAngle();
-                Robot.driveTrain.movingRotation(strafe, vertical, m_rot, gyroDeg);;
-                if ((-1 < (m_target - Robot.AHRS.getYaw())) && ((m_target - Robot.AHRS.getYaw()) < 1)) {
-                    m_rot = 0;
-                    m_currentArray = m_targetArray;
-                }
-        }   
+            Robot.driveTrain.fieldDrive(strafe, vertical, rotation , -gyroDeg);
+        // }   
+        // else if((Robot.oi.driveStick.getMagnitude() > .05) && slow && (m_rot == 0)){ //slow driving
+        //         double strafe = Robot.oi.driveStick.getX();
+        //         double vertical = -Robot.oi.driveStick.getY();
+        //         double gyroDeg = Robot.AHRS.getAngle();
+        //         Robot.driveTrain.slowfieldDrive(strafe, vertical, m_rot, gyroDeg);
+        // }
+        // else if(Robot.oi.driveStick.getMagnitude() < .05 && (m_rot == 0)){ //no movement to fix error readouts
+        //             Robot.driveTrain.fieldDrive(0, 0, 0, 0);
+        // }
+        // else if (m_rot != 0){ //if rotating (main rotate)
+        //         double strafe = Robot.oi.driveStick.getX();
+        //         double vertical = -Robot.oi.driveStick.getY();
+        //         double gyroDeg = Robot.AHRS.getAngle();
+        //         Robot.driveTrain.movingRotation(strafe, vertical, m_rot, gyroDeg);;
+        //         if ((-1 < (m_target - Robot.AHRS.getYaw())) && ((m_target - Robot.AHRS.getYaw()) < 1)) {
+        //             m_rot = 0;
+        //             m_currentArray = m_targetArray;
+        //         }
+        // }   
     }
 
     // Make this return true when this Command no longer needs to run execute()

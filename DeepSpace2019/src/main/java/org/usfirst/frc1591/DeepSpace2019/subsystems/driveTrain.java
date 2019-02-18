@@ -120,7 +120,8 @@ public class driveTrain extends Subsystem {
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
     public void fieldDrive(double strafe, double vertical, double rotation, double gyroDeg){
-        mecanumDrive.driveCartesian(strafe, vertical, rotation / 3, gyroDeg);
+        mecanumDrive.driveCartesian(strafe, vertical, rotation , gyroDeg);
+        System.out.println("Strafe :" + strafe + "vertical :" + vertical + "rotation :" + rotation + "Gyro degrees :" + gyroDeg);
     }
 
     public void slowfieldDrive(double strafe, double vertical, double rotation, double gyroDeg){
@@ -136,5 +137,9 @@ public class driveTrain extends Subsystem {
     }
 
     // watch for changing rotation divisor and slow speed divisors
+
+    public void resetGyro() {
+        Robot.AHRS.reset();
+    }
 }
 

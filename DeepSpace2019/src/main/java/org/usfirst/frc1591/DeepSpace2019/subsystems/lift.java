@@ -7,6 +7,8 @@ import edu.wpi.first.wpilibj.PIDSource;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 
 public class lift extends Subsystem {
 
@@ -33,6 +35,7 @@ public class lift extends Subsystem {
         rearRangeFinder = new AnalogInput(2);
         addChild("rearRangeFinder",rearRangeFinder);
         
+        SmartDashboard.putData("liftMotor", liftMotor);
         unliftFront();
         unliftRear();
     }
