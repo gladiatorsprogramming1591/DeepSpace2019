@@ -76,7 +76,7 @@ public class claw extends Subsystem {
 
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
-    public boolean clawOpen = false;
+    public boolean clawOpen = true;
     public boolean clawFolded = true;
     public void openClaw() {
         clawPiston.set(DoubleSolenoid.Value.kForward);
