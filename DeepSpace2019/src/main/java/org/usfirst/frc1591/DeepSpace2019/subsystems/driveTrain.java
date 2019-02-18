@@ -74,7 +74,7 @@ public class driveTrain extends Subsystem {
     @Override
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
-        setDefaultCommand(new driveManual());
+        setDefaultCommand(new driveManualExp());
     }
 
     @Override
@@ -85,7 +85,7 @@ public class driveTrain extends Subsystem {
 
     public void fieldDrive(double strafe, double vertical, double rotation, double gyroDeg){
         mecanumDrive.driveCartesian(strafe, vertical, rotation , gyroDeg);
-        System.out.println("Strafe :" + strafe + "vertical :" + vertical + "rotation :" + rotation + "Gyro degrees :" + gyroDeg);
+        // System.out.println("Strafe :" + strafe + "vertical :" + vertical + "rotation :" + rotation + "Gyro degrees :" + gyroDeg);
     }
 
     public void slowfieldDrive(double strafe, double vertical, double rotation, double gyroDeg){
@@ -101,6 +101,7 @@ public class driveTrain extends Subsystem {
     }
 
     public void rotateToPos(double strafe_, double vertical_, double gyroDeg_, double targetAngle_) {
+        System.out.println("strafe_" + strafe_ + "vertical_" + vertical_ + "gyroDeg_" + gyroDeg_ + "targetAngle_" + targetAngle_);
         double rotation = 0;
         double current = Robot.AHRS.getYaw();
 
@@ -117,19 +118,19 @@ public class driveTrain extends Subsystem {
                 if (current >= 0){
                     double temp = current -180;
                     if(temp < targetAngle_ && targetAngle_ < current){
-                        rotation = -1;
+                        rotation = -0.25;
                     } 
                     else {
-                        rotation = 1;
+                        rotation = 0.25;
                     }
                 } 
                 else {
                     double temp = current + 180;
                     if (current < targetAngle_ && targetAngle_ < temp){
-                        rotation = 1;
+                        rotation = 0.25;
                     } 
                     else {
-                        rotation = -1;
+                        rotation = -0.25;
                     }
                 }
             }

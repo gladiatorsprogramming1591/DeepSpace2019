@@ -32,7 +32,6 @@ public class driveManualExp extends Command {
             double vertical = -Robot.oi.driveStick.getRawAxis(3);
             double gyroDeg = Robot.AHRS.getAngle();
             
-            
             if (Robot.oi.driveStick.getPOV() != currentPOV && Robot.oi.driveStick.getPOV()!= -1){
                 int targetIndex = Robot.oi.driveStick.getPOV() / 45;
                 targetAngle = Robot.driveTrain.Angles.get(targetIndex);
