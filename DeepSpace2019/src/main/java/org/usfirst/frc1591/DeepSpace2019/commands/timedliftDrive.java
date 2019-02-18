@@ -13,7 +13,7 @@ public class timedliftDrive extends Command {
     @Override
     protected void initialize() {
         setTimeout(m_timeout);
-        Robot.lift.checkPneumatics();
+        Robot.lift.turnWheel();
     }
 
     @Override
