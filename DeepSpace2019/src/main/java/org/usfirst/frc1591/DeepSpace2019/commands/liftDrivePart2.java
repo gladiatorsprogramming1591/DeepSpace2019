@@ -2,16 +2,17 @@ package org.usfirst.frc1591.DeepSpace2019.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import org.usfirst.frc1591.DeepSpace2019.Robot;
 
-public class unliftFront extends Command {
-    public unliftFront() {
+public class liftDrivePart2 extends Command {
+    final double highRearHeight = 70.0;
+
+    public liftDrivePart2() {
         requires(Robot.lift);
     }
 
     @Override
     protected void initialize() {
-        setTimeout(1);
         Robot.lift.unliftFront();
-        Robot.lift.frontExtended = false;
+        // Robot.driveTrain.fieldDrive();
     }
 
     @Override
@@ -20,12 +21,12 @@ public class unliftFront extends Command {
 
     @Override
     protected boolean isFinished() {
-        return isTimedOut();
+        return Robot.lift.getRearHeight() < highRearHeight;
     }
 
     @Override
     protected void end() {
-        // Robot.lift.disableFront();
+        // Robot.lift.disableRear();
     }
 
     @Override
