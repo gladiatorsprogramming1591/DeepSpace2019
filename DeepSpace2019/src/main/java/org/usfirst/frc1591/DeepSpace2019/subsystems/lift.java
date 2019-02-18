@@ -93,6 +93,7 @@ public class lift extends Subsystem {
         } 
         else {
             return false;
+        }
     }
 
     public double getFrontHeight(){
