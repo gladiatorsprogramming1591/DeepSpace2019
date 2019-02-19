@@ -17,8 +17,9 @@ public class elevator extends Subsystem {
     Encoder enc;
     ArrayList<Integer> elevatorPositions;
 
-    final double ELEVATOR_UP_SPEED = -0.7;
-    final double ELEVATOR_DOWN_SPEED = 0.4;
+    final double ELEVATOR_UP_SPEED = 0.5;
+    final double ELEVATOR_DOWN_SPEED = -0.3;
+    final double ELEVATOR_BRAKE_SPEED = 0.2;
     boolean bottomState; // state true if bottom limit switch is pushed in
     boolean topState; // state true if top limit switch is pushed in
 
@@ -34,9 +35,9 @@ public class elevator extends Subsystem {
     boolean distanceReached = false;
 
     // Constants for the elevator stops, CURRENTLY PLACEHOLDERS
-    int L1HATCH_POS = 0;
-    int CARGO_SHIP_POS = 284;
-    int L2HATCH_POS = 630;
+    int L1HATCH_POS = -15;
+    int CARGO_SHIP_POS = -340;
+    int L2HATCH_POS = -660;
 
     public elevator() {
         elevatorTopSwitch = new DigitalInput(0);
@@ -49,7 +50,7 @@ public class elevator extends Subsystem {
         
         elevatorMotor = new Spark(1);
         addChild("elevatorMotor",elevatorMotor);
-        elevatorMotor.setInverted(false);
+        elevatorMotor.setInverted(true);
         
         // Construct arraylist
         elevatorPositions = new ArrayList<Integer>();
@@ -79,7 +80,7 @@ public class elevator extends Subsystem {
     public void periodic() {
         // This code is run every loop
         if (elevatorMotor.get() < 0 && getTopSwitchState() == true) {
-            stop();
+            pause();
             System.out.println("Top switch pressed. ABORT ABORT ABORT");
         }
         else if(elevatorMotor.get() >= 0 && getBottomSwitchState() == true) {
@@ -103,10 +104,10 @@ public class elevator extends Subsystem {
     public int getdirection(int targetPosIndex) {
         System.out.println("Moving from " + getCurrentPos() + " to " + getElevatorPositions(targetPosIndex));
         int direction;
-        if (getElevatorPositions(targetPosIndex) > getCurrentPos()) {
+        if (getElevatorPositions(targetPosIndex) < getCurrentPos()) {
             direction = 1;
         }
-        else if (getElevatorPositions(targetPosIndex) < getCurrentPos()) {
+        else if (getElevatorPositions(targetPosIndex) > getCurrentPos()) {
             direction = -1;
         }
         else {
@@ -170,6 +171,11 @@ public class elevator extends Subsystem {
         elevatorMotor.set(0);
     }
 
+    // Called when an elevator command is interrupted or ended
+    public void pause(){
+        elevatorMotor.set(ELEVATOR_BRAKE_SPEED);
+    }
+    
     // Command methods
 
     public void moveInit(int posIndex) {
@@ -185,12 +191,12 @@ public class elevator extends Subsystem {
     public boolean moveIsFinished(int posIndex) {
         switch (direction) {
             case 1:
-                if (getCurrentPos() >= getElevatorPositions(posIndex)) {
+                if (getCurrentPos() <= getElevatorPositions(posIndex)) {
                     distanceReached = true;
                 }
                 break;
             case -1:
-                if (getCurrentPos() <= getElevatorPositions(posIndex)) {
+                if (getCurrentPos() >= getElevatorPositions(posIndex)) {
                     distanceReached = true;
                 }
                 break;
