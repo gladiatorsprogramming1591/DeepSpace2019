@@ -101,17 +101,27 @@ public class driveTrain extends Subsystem {
     }
 
     public void rotateToPos(double strafe_, double vertical_, double gyroDeg_, double targetAngle_) {
-        System.out.println("strafe_" + strafe_ + "vertical_" + vertical_ + "gyroDeg_" + gyroDeg_ + "targetAngle_" + targetAngle_);
         double rotation = 0;
         double current = Robot.AHRS.getYaw();
+        // System.out.println("strafe_ " + strafe_ + " vertical_ " + vertical_ + " gyroDeg_ " + gyroDeg_ + " targetAngle_ " + targetAngle_ + " current " + current);
 
-        if (Robot.oi.driveStick.getX() != 0){
+        if (Math.abs(Robot.oi.driveStick.getX()) > 0.1){
             rotation = Robot.oi.driveStick.getX();
+            // System.out.println("Using joystick. Rotation = " + rotation);
         }
         else {
+            double distanceToTarget;
+            if (targetAngle_ > current) {
+                distanceToTarget = targetAngle_ - current;
+            }
+            else {
+                distanceToTarget = current - targetAngle_;
+            }
+
             // if equal to target angle with offset
-            if (Math.abs(targetAngle_ - current) < OFFSET) {
+            if ( distanceToTarget < OFFSET) {
                 rotation = 0;
+                // System.out.println("Within offset. Not moving.");
             }
             else {
                 // move in the direction we need to get there
@@ -119,18 +129,22 @@ public class driveTrain extends Subsystem {
                     double temp = current -180;
                     if(temp < targetAngle_ && targetAngle_ < current){
                         rotation = -0.25;
+                        // System.out.println("Moving 1");
                     } 
                     else {
                         rotation = 0.25;
+                        // System.out.println("Moving 2");
                     }
                 } 
                 else {
                     double temp = current + 180;
                     if (current < targetAngle_ && targetAngle_ < temp){
                         rotation = 0.25;
+                        // System.out.println("Moving 3");
                     } 
                     else {
                         rotation = -0.25;
+                        // System.out.println("Moving 4");
                     }
                 }
             }
