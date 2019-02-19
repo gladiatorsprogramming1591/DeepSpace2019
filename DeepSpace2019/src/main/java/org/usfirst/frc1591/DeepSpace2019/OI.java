@@ -76,21 +76,14 @@ public class OI {
         SmartDashboard.putData("elevatorL2Hatch", new elevatorL2Hatch());
         SmartDashboard.putData("elevatorL1Hatch", new elevatorL1Hatch());
         SmartDashboard.putData("elevatorCargoShip", new elevatorCargoShip());
-        SmartDashboard.putData("driveManual", new driveManual());
         SmartDashboard.putData("clawOpen", new clawOpen());
         SmartDashboard.putData("clawClose", new clawClose());
         SmartDashboard.putData("clawFold", new clawFold());
         SmartDashboard.putData("clawUnfold", new clawUnfold());
-        SmartDashboard.putData("compressorOn", new compressorOn());
-        SmartDashboard.putData("compressorOff", new compressorOff());
-        SmartDashboard.putData("driveSlow", new driveSlow());
-        SmartDashboard.putData("timedDrive", new timedDrive(0, 0, 0, 0));
-        SmartDashboard.putData("distanceDrive", new distanceDrive());
         SmartDashboard.putData("liftRear", new liftRear());
         SmartDashboard.putData("unliftRear", new unliftRear());
         SmartDashboard.putData("liftFront", new liftFront());
         SmartDashboard.putData("unliftFront", new unliftFront());
-        SmartDashboard.putData("liftCommandGroup", new liftCommandGroup());
         SmartDashboard.putData("resetGyro", new resetGyro());
         SmartDashboard.putData("liftCommandGroup1", new liftCommandGroup1());
 
@@ -98,8 +91,6 @@ public class OI {
 
         // add elevator test button
         JoystickButton elevatorTestButton = new JoystickButton(manipulatorStick, 2);
-
-        SmartDashboard.putData("timedliftDrive", new timedliftDrive(1));
 
         liftCommandGroupButton = new JoystickButton(manipulatorStick, 5);
         liftCommandGroupButton.whenPressed(new liftCommandGroup());
