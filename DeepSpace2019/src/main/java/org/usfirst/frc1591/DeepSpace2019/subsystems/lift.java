@@ -1,12 +1,16 @@
 package org.usfirst.frc1591.DeepSpace2019.subsystems;
 import org.usfirst.frc1591.DeepSpace2019.commands.*;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.PIDOutput;
 import edu.wpi.first.wpilibj.PIDSource;
 import edu.wpi.first.wpilibj.Spark;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 
 public class lift extends Subsystem {
 
@@ -25,7 +29,7 @@ public class lift extends Subsystem {
         
         liftMotor = new Spark(0);
         addChild("liftMotor",liftMotor);
-        liftMotor.setInverted(false);
+        liftMotor.setInverted(true);
 
         frontRangeFinder = new AnalogInput(1);
         addChild("frontRangeFinder",frontRangeFinder);
@@ -33,6 +37,7 @@ public class lift extends Subsystem {
         rearRangeFinder = new AnalogInput(2);
         addChild("rearRangeFinder",rearRangeFinder);
         
+        SmartDashboard.putData("liftMotor", liftMotor);
         unliftFront();
         unliftRear();
     }
@@ -43,6 +48,8 @@ public class lift extends Subsystem {
 
     @Override
     public void periodic() {
+        SmartDashboard.putNumber("frontHeight", getFrontHeight());
+        SmartDashboard.putNumber("rearHeight", getRearHeight());
     }
 
     public boolean frontExtended = false;
@@ -72,17 +79,25 @@ public class lift extends Subsystem {
         backPistons.set(DoubleSolenoid.Value.kOff);
     }
     
-    public void turnWheel() {
-        liftMotor.set(.6); //assumes positive is forward
+    public void turnWheel(double speed) {
+        liftMotor.set(speed); //assumes positive is forward
     }
    
+    public void liftFrontAndDrive(double speed) {
+        liftFront();
+        turnWheel(speed);
+    }
+    
     public void stopWheel(){
         liftMotor.set(0);
     }
     
-    public void checkPneumatics(){
-        if (rearExtended){
-            turnWheel(); 
+    public boolean checkPneumatics(){
+        if (frontPistons.get() == Value.kForward || backPistons.get() == Value.kForward) {
+            return true;
+        } 
+        else {
+            return false;
         }
     }
 
