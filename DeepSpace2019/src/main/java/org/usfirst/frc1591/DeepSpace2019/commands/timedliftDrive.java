@@ -3,10 +3,11 @@ import edu.wpi.first.wpilibj.command.Command;
 import org.usfirst.frc1591.DeepSpace2019.Robot;
 
 public class timedliftDrive extends Command {
-    final double m_timeout = 2.0;
+    double m_timeout = 2.0;
     
-    public timedliftDrive() {
+    public timedliftDrive(double time) {
         requires(Robot.lift);
+        m_timeout = time;
     }
 
     @Override

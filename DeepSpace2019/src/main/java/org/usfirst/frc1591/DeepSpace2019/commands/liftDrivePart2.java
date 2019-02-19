@@ -3,7 +3,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import org.usfirst.frc1591.DeepSpace2019.Robot;
 
 public class liftDrivePart2 extends Command {
-    final double highRearHeight = 70.0;
+    final double highRearHeight = 60.0;
 
     public liftDrivePart2() {
         requires(Robot.lift);
