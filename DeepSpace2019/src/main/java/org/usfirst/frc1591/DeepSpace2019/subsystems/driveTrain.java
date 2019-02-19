@@ -28,6 +28,8 @@ public class driveTrain extends Subsystem {
 
     public final float OFFSET = 2; // PLACEHOLDER
 
+    public boolean autoCorrect = true;
+
     public driveTrain() {
         lFmotor = new WPI_TalonSRX(0);
         lFmotor.setNeutralMode(NeutralMode.Brake);
@@ -103,10 +105,12 @@ public class driveTrain extends Subsystem {
     public void rotateToPos(double strafe_, double vertical_, double gyroDeg_, double targetAngle_) {
         double rotation = 0;
         double current = Robot.AHRS.getYaw();
+
         // System.out.println("strafe_ " + strafe_ + " vertical_ " + vertical_ + " gyroDeg_ " + gyroDeg_ + " targetAngle_ " + targetAngle_ + " current " + current);
 
         if (Math.abs(Robot.oi.driveStick.getX()) > 0.1){
             rotation = Robot.oi.driveStick.getX();
+            autoCorrect = false;
             // System.out.println("Using joystick. Rotation = " + rotation);
         }
         else {
@@ -123,7 +127,7 @@ public class driveTrain extends Subsystem {
                 rotation = 0;
                 // System.out.println("Within offset. Not moving.");
             }
-            else {
+            else if(autoCorrect == true) {
                 // move in the direction we need to get there
                 if (current >= 0){
                     double temp = current -180;

@@ -69,6 +69,7 @@ public class driveManualExp extends Command {
             if (setTargetAngle) {
                 targetAngle = Robot.driveTrain.Angles.get(targetIndex);
                 currentPOV = targetIndex * RESOLUTION;
+                Robot.driveTrain.autoCorrect = true;
                 System.out.println("Rocket angles mode: " + rocketAnglesMode + " Setting target index to " + targetIndex);
             }
         
