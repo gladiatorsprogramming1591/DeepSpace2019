@@ -62,6 +62,10 @@ public class compressorSS extends Subsystem {
     public void periodic() {
         // Put code here to be run every loop
         compressor.start();
+        //Add an if/else statement. use the pressure switch,
+        // which is under the compressor object as the argument,
+        // i.e. the true false factor.
+        // if true set the Relay to kForward else kOff
 
     }
 
