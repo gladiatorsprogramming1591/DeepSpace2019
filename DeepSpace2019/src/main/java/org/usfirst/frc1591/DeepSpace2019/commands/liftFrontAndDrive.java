@@ -2,22 +2,20 @@ package org.usfirst.frc1591.DeepSpace2019.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import org.usfirst.frc1591.DeepSpace2019.Robot;
 
-public class frontLiftToggle extends Command {
-    public frontLiftToggle() {
+public class liftFrontAndDrive extends Command {
+    private double m_speed;
+    private double m_time;
+
+    public liftFrontAndDrive(double speed, double time) {
         requires(Robot.lift);
+        m_speed = speed;
+        m_time = time;
     }
 
     @Override
     protected void initialize() {
-        setTimeout(1);
-        if (Robot.lift.frontExtended == true) {
-            Robot.lift.frontExtended = false;
-            Robot.lift.unliftFront();
-            }
-            else {
-                Robot.lift.frontExtended = true;
-                Robot.lift.liftFront();
-            }
+        setTimeout(m_time);
+        Robot.lift.liftFrontAndDrive(m_speed);
     }
 
     @Override
@@ -31,7 +29,6 @@ public class frontLiftToggle extends Command {
 
     @Override
     protected void end() {
-        Robot.lift.disableFront();
     }
 
     @Override
