@@ -5,10 +5,15 @@ import org.usfirst.frc1591.DeepSpace2019.Robot;
 
 public class driveManualExp extends Command {
 
-    double targetAngle = 0;
-    double currentPOV = 0;
+    double targetAngle;
 
     boolean rocketAnglesMode = false;
+
+    public boolean autoCorrect = true;
+
+    boolean slowMode = false;
+
+    final double slowDivisor = 3.5;
 
     public driveManualExp() {
         targetAngle = 0;
@@ -23,7 +28,7 @@ public class driveManualExp extends Command {
     // Called just before this Command runs the first time
     @Override
     protected void initialize() {
-
+        targetAngle = 0;
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -31,19 +36,34 @@ public class driveManualExp extends Command {
     protected void execute() {
         final int RESOLUTION = 45;
 
+        if (Robot.oi.driveStick.getRawButtonPressed(1)) {
+            slowMode = true;
+        }
+        else if(Robot.oi.driveStick.getRawButtonPressed(4)) {
+            slowMode = false;
+        }
+
         if (Robot.oi.driveStick.getRawButtonPressed(2)) {
             rocketAnglesMode = false;
+            targetAngle = Robot.AHRS.getYaw();
+            autoCorrect = true;
         }
         else if (Robot.oi.driveStick.getRawButtonPressed(3)) {
             rocketAnglesMode = true;
+            targetAngle = Robot.AHRS.getYaw();
+            autoCorrect = true;
         }
 
         if (!Robot.lift.checkPneumatics()) {
             double strafe = Robot.oi.driveStick.getRawAxis(2);
             double vertical = -Robot.oi.driveStick.getRawAxis(3);
             double gyroDeg = Robot.AHRS.getAngle();
-            int targetIndex = Robot.oi.driveStick.getPOV() / RESOLUTION;
             boolean setTargetAngle = false;
+            int targetIndex = 0;
+
+            if (Robot.oi.driveStick.getPOV() != -1) {
+                targetIndex = Robot.oi.driveStick.getPOV() / RESOLUTION;
+            }
             
             if (rocketAnglesMode == false) {
                 switch (targetIndex) {
@@ -68,12 +88,16 @@ public class driveManualExp extends Command {
             
             if (setTargetAngle) {
                 targetAngle = Robot.driveTrain.Angles.get(targetIndex);
-                currentPOV = targetIndex * RESOLUTION;
-                Robot.driveTrain.autoCorrect = true;
+                
                 System.out.println("Rocket angles mode: " + rocketAnglesMode + " Setting target index to " + targetIndex);
             }
         
-            Robot.driveTrain.rotateToPos(strafe, vertical, gyroDeg, targetAngle);
+            if (slowMode == true) {
+                autoCorrect = Robot.driveTrain.rotateToPos(strafe / slowDivisor, vertical / slowDivisor, gyroDeg, targetAngle, autoCorrect);
+            }
+            else {
+                autoCorrect = Robot.driveTrain.rotateToPos(strafe, vertical, gyroDeg, targetAngle, autoCorrect);
+            }
         }
     }
 
