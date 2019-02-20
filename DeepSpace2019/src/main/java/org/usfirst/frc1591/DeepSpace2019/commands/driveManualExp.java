@@ -15,6 +15,8 @@ public class driveManualExp extends Command {
 
     final double slowDivisor = 3.5;
 
+    int targetIndex = 0;
+
     public driveManualExp() {
         targetAngle = 0;
         requires(Robot.driveTrain);
@@ -59,7 +61,6 @@ public class driveManualExp extends Command {
             double vertical = -Robot.oi.driveStick.getRawAxis(3);
             double gyroDeg = Robot.AHRS.getAngle();
             boolean setTargetAngle = false;
-            int targetIndex = 0;
 
             if (Robot.oi.driveStick.getPOV() != -1) {
                 targetIndex = Robot.oi.driveStick.getPOV() / RESOLUTION;
