@@ -6,7 +6,7 @@ public class liftFrontAndDrive extends Command {
     private double m_speed;
     private double m_time;
 
-    public liftFrontAndDrive(double speed, double time) {
+    public liftFrontAndDrive(double time, double speed) {
         requires(Robot.lift);
         m_speed = speed;
         m_time = time;

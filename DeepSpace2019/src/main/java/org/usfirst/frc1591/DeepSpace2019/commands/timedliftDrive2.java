@@ -32,12 +32,12 @@ public class timedliftDrive2 extends Command {
 
     @Override
     protected boolean isFinished() {
-        return (isTimedOut() || (Robot.lift.getFrontHeight() <= 5));
+        return isTimedOut() ;// (Robot.lift.getFrontHeight() <= 5));
     }
 
     @Override
     protected void end() {
-        // Robot.lift.stopWheel();
+        Robot.lift.stopWheel();
     }
 
     @Override

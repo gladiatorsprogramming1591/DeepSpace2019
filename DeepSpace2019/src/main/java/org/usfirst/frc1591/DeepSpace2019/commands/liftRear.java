@@ -9,7 +9,7 @@ public class liftRear extends Command {
 
     @Override
     protected void initialize() {
-        setTimeout(1);
+        setTimeout(1.5);
         Robot.lift.liftRear();
         Robot.lift.rearExtended = true;
     }

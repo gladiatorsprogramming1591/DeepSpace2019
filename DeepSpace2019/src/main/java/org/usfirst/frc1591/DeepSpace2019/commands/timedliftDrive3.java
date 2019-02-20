@@ -32,7 +32,7 @@ public class timedliftDrive3 extends Command {
 
     @Override
     protected boolean isFinished() {
-        return (isTimedOut() || (Robot.lift.getRearHeight() <= 5));
+        return isTimedOut();// || (Robot.lift.getRearHeight() <= 5));
     }
 
     @Override
