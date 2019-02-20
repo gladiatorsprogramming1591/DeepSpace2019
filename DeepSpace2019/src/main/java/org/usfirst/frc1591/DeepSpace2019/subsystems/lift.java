@@ -6,6 +6,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.PIDOutput;
 import edu.wpi.first.wpilibj.PIDSource;
 import edu.wpi.first.wpilibj.Spark;
+import edu.wpi.first.wpilibj.Ultrasonic;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
@@ -17,8 +18,10 @@ public class lift extends Subsystem {
     private DoubleSolenoid frontPistons;
     private DoubleSolenoid backPistons;
     private Spark liftMotor; 
-    private AnalogInput frontRangeFinder;
-    private AnalogInput rearRangeFinder;
+    // private AnalogInput frontRangeFinder;
+    // private AnalogInput rearRangeFinder;
+    private Ultrasonic frontUltrasonic;
+    private Ultrasonic rearUltrasonic;
 
     public lift() {
         frontPistons = new DoubleSolenoid(5, 0, 1);
@@ -31,12 +34,20 @@ public class lift extends Subsystem {
         addChild("liftMotor",liftMotor);
         liftMotor.setInverted(true);
 
-        frontRangeFinder = new AnalogInput(1);
-        addChild("frontRangeFinder",frontRangeFinder);
+        // frontRangeFinder = new AnalogInput(1);
+        // addChild("frontRangeFinder",frontRangeFinder);
 
-        rearRangeFinder = new AnalogInput(2);
-        addChild("rearRangeFinder",rearRangeFinder);
-        
+        // rearRangeFinder = new AnalogInput(2);
+        // addChild("rearRangeFinder",rearRangeFinder);
+
+        frontUltrasonic = new Ultrasonic(7, 8);
+        addChild("frontUltrasonic", frontUltrasonic);
+        SmartDashboard.putData("frontUltrasonic", frontUltrasonic);
+
+        rearUltrasonic = new Ultrasonic(5, 6);
+        addChild("rearUltrasonic", rearUltrasonic);
+        SmartDashboard.putData("rearUltrasonic", rearUltrasonic);
+       
         SmartDashboard.putData("liftMotor", liftMotor);
         unliftFront();
         unliftRear();
@@ -79,10 +90,15 @@ public class lift extends Subsystem {
         backPistons.set(DoubleSolenoid.Value.kOff);
     }
     
-    public void turnWheel() {
-        liftMotor.set(.6); //assumes positive is forward
+    public void turnWheel(double speed) {
+        liftMotor.set(speed); //assumes positive is forward
     }
    
+    public void liftFrontAndDrive(double speed) {
+        liftFront();
+        turnWheel(speed);
+    }
+    
     public void stopWheel(){
         liftMotor.set(0);
     }
@@ -97,11 +113,11 @@ public class lift extends Subsystem {
     }
 
     public double getFrontHeight(){
-        return frontRangeFinder.getValue();
+        return frontUltrasonic.getRangeInches();
     }
 
     public double getRearHeight(){
-        return rearRangeFinder.getValue();
+        return rearUltrasonic.getRangeInches();
     }
 }
 
