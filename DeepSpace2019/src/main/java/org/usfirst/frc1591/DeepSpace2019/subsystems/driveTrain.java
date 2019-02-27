@@ -100,6 +100,10 @@ public class driveTrain extends Subsystem {
         Robot.AHRS.reset();
     }
 
+    public void robotDrive(double strafe, double vertical, double rotation){
+        mecanumDrive.driveCartesian(strafe, vertical, rotation);
+    }
+
     public boolean rotateToPos(double strafe_, double vertical_, double gyroDeg_, double targetAngle_, boolean autoCorrect_) {
         double rotation = 0;
         double current = Robot.AHRS.getYaw();

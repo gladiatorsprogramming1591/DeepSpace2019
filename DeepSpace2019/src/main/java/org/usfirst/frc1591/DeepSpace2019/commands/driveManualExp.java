@@ -94,7 +94,7 @@ public class driveManualExp extends Command {
             }
         
             if (slowMode == true) {
-                autoCorrect = Robot.driveTrain.rotateToPos(strafe / slowDivisor, vertical / slowDivisor, gyroDeg, targetAngle, autoCorrect);
+                autoCorrect = Robot.driveTrain.rotateToPos(strafe / 2.5, vertical / slowDivisor, gyroDeg, targetAngle, autoCorrect);
             }
             else {
                 autoCorrect = Robot.driveTrain.rotateToPos(strafe, vertical, gyroDeg, targetAngle, autoCorrect);
