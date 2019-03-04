@@ -75,8 +75,8 @@ public class OI {
     public OI() {
 
         manipulatorStick = new Joystick(1);
-        clawOpenButton = new JoystickButton(manipulatorStick, 5);
-        clawFlapButton = new JoystickButton(manipulatorStick, 6);
+        // clawOpenButton = new JoystickButton(manipulatorStick, 5);
+        // clawFlapButton = new JoystickButton(manipulatorStick, 6);
         driveStick = new Joystick(0);
 
         // SmartDashboard Buttons
