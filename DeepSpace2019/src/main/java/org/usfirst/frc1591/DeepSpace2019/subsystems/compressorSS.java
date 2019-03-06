@@ -63,7 +63,7 @@ public class compressorSS extends Subsystem {
         // i.e. the true false factor.
         // if true set the Relay to kForward else kOff
         // if (compressor.getPressureSwitchValue() == false) {
-        //     relay.set(Value.kForward);
+            relay.set(Value.kForward);
         //     // System.out.println("Turning compressor on");
         // }
         // else {
