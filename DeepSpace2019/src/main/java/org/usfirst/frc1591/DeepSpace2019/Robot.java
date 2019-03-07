@@ -57,7 +57,7 @@ public class Robot extends TimedRobot {
         AHRS = new AHRS(SPI.Port.kMXP);
         SmartDashboard.putData("AHRS",AHRS);
 
-        CameraServer.getInstance().startAutomaticCapture();
+        // CameraServer.getInstance().startAutomaticCapture();
         
         // Feed the camera to the driver station
         CameraServer.getInstance().startAutomaticCapture();

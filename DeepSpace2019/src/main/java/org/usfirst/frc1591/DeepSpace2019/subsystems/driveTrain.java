@@ -27,6 +27,7 @@ public class driveTrain extends Subsystem {
     public ArrayList<Double> Angles = new ArrayList<Double>();
 
     public final float OFFSET = 2; // PLACEHOLDER
+    public double storedPosition;
 
     public driveTrain() {
         lFmotor = new WPI_TalonSRX(0);
@@ -104,7 +105,15 @@ public class driveTrain extends Subsystem {
         mecanumDrive.driveCartesian(strafe, vertical, rotation);
     }
 
-    public boolean rotateToPos(double strafe_, double vertical_, double gyroDeg_, double targetAngle_, boolean autoCorrect_) {
+    public void storePos(double TAngle_){
+        storedPosition = TAngle_;
+    }
+
+    public double getPos(){
+        return storedPosition;
+    }
+
+    public boolean rotateToPos(double strafe_, double vertical_, double gyroDeg_, double targetAngle_, boolean autoCorrect_, boolean Robotmode_) {
         double rotation = 0;
         double current = Robot.AHRS.getYaw();
 
@@ -155,7 +164,11 @@ public class driveTrain extends Subsystem {
                 }
             }
         }
+        if(Robotmode_){
+            Robot.driveTrain.robotDrive(strafe_, vertical_, rotation);
+        } else if (!Robotmode_){
         Robot.driveTrain.fieldDrive(strafe_, vertical_, rotation, -gyroDeg_);
+        }
         return autoCorrect_;
     }
 }

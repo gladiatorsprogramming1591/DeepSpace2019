@@ -18,19 +18,13 @@ public class driveManualExp extends Command {
     int targetIndex = 0;
 
     public driveManualExp() {
-        targetAngle = 0;
-        requires(Robot.driveTrain);
-    }
-
-    public driveManualExp(double target) {
-        targetAngle = target;
         requires(Robot.driveTrain);
     }
 
     // Called just before this Command runs the first time
     @Override
     protected void initialize() {
-        targetAngle = 0;
+        targetAngle = Robot.driveTrain.getPos();
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -93,11 +87,12 @@ public class driveManualExp extends Command {
                 System.out.println("Rocket angles mode: " + rocketAnglesMode + " Setting target index to " + targetIndex);
             }
         
+            boolean robotDrive = false;
             if (slowMode == true) {
-                autoCorrect = Robot.driveTrain.rotateToPos(strafe / 2.5, vertical / slowDivisor, gyroDeg, targetAngle, autoCorrect);
+                autoCorrect = Robot.driveTrain.rotateToPos(strafe / 2.0, vertical / slowDivisor, gyroDeg, targetAngle, autoCorrect, robotDrive);
             }
             else {
-                autoCorrect = Robot.driveTrain.rotateToPos(strafe, vertical, gyroDeg, targetAngle, autoCorrect);
+                autoCorrect = Robot.driveTrain.rotateToPos(strafe, vertical, gyroDeg, targetAngle, autoCorrect, robotDrive);
             }
         }
     }
@@ -118,6 +113,7 @@ public class driveManualExp extends Command {
     // subsystems is scheduled to run
     @Override
     protected void interrupted() {
+        Robot.driveTrain.storePos(targetAngle);
         end();
     }
 }
