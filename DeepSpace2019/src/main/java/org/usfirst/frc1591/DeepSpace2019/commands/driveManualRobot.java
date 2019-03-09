@@ -3,7 +3,11 @@ import edu.wpi.first.wpilibj.command.Command;
 
 import org.usfirst.frc1591.DeepSpace2019.Robot;
 
-public class driveManualExp extends Command {
+public class driveManualRobot extends Command {
+
+    public driveManualRobot() {
+        requires(Robot.driveTrain);
+    }
 
     double targetAngle;
 
@@ -17,10 +21,6 @@ public class driveManualExp extends Command {
 
     int targetIndex = 0;
 
-    public driveManualExp() {
-        requires(Robot.driveTrain);
-    }
-
     // Called just before this Command runs the first time
     @Override
     protected void initialize() {
@@ -30,7 +30,7 @@ public class driveManualExp extends Command {
     // Called repeatedly when this Command is scheduled to run
     @Override
     protected void execute() {
-        final int RESOLUTION = 45;
+            final int RESOLUTION = 45;
 
         if (Robot.oi.driveStick.getRawButtonPressed(1)) {
             slowMode = true;
@@ -84,10 +84,10 @@ public class driveManualExp extends Command {
             if (setTargetAngle) {
                 targetAngle = Robot.driveTrain.Angles.get(targetIndex);
                 
-                // System.out.println("Rocket angles mode: " + rocketAnglesMode + " Setting target index to " + targetIndex);
+                System.out.println("Rocket angles mode: " + rocketAnglesMode + " Setting target index to " + targetIndex);
             }
-        
-            boolean robotDrive = false;
+            
+            boolean robotDrive = true;
             if (slowMode == true) {
                 autoCorrect = Robot.driveTrain.rotateToPos(strafe / 2.0, vertical / slowDivisor, gyroDeg, targetAngle, autoCorrect, robotDrive);
             }
