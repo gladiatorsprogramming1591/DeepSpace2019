@@ -159,13 +159,14 @@ bin/
 # KDiff merge files
 *.orig
 
-# Build files
+# Build Files
 build/
+.gradle/
 
-# WPILib
-.wpilib/wpilib_preferences.json
+#WPIlib
+.wpilib
 
-# Log directory (mostly for sim logs)
+# Log files
 logs/
 
 # KDiff merge files
