@@ -109,6 +109,7 @@ public class OI {
         cargoshipButton = new JoystickButton(manipulatorStick, 3);
         elevator2Button = new JoystickButton(manipulatorStick, 4);
         liftButton = new JoystickButton(manipulatorStick, 9);
+        
         fieldDrive = new JoystickButton(driveStick, 5);
         robotDrive = new JoystickButton(driveStick, 6);
 
