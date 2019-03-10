@@ -71,8 +71,6 @@ public class vision extends Subsystem {
         leftY = leftYEntry.getDouble(0);
         leftArea = leftAreaEntry.getDouble(0);
     }
-    // Put methods for controlling this subsystem
-    // here. Call these from Commands.
 
     public boolean checkCentered() {
         boolean centered = false;

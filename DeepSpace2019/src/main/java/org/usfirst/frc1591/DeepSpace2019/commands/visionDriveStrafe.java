@@ -23,7 +23,7 @@ public class visionDriveStrafe extends Command {
     protected void execute() {
         if(Robot.vision.checkCentered()) {
             isFinished = true;
-            Robot.driveTrain.fieldDrive(0, 0, 0, 0); // stop the robot, should eventually be robot oriented
+            Robot.driveTrain.robotDrive(0, 0, 0); // stop the robot
         }
         else {
             double strafeSpeed;
@@ -39,6 +39,7 @@ public class visionDriveStrafe extends Command {
             }
 
             // set robot oriented drive strafeSpeed, 0 vert, rotation based on rotate to pos to maintain target pos
+            Robot.driveTrain.robotDrive(strafeSpeed, 0, rotation);
         }
         
     }
