@@ -119,51 +119,56 @@ public class driveTrain extends Subsystem {
 
         // System.out.println("strafe_ " + strafe_ + " vertical_ " + vertical_ + " gyroDeg_ " + gyroDeg_ + " targetAngle_ " + targetAngle_ + " current " + current);
 
-        if (Math.abs(Robot.oi.driveStick.getX()) > 0.1){
+        if (Math.abs(Robot.oi.driveStick.getX()) > 0.1){ // if joystick is being pushed
             rotation = Robot.oi.driveStick.getX();
             autoCorrect_ = false;
             // System.out.println("Using joystick. Rotation = " + rotation);
         }
         else {
-            double distanceToTarget;
-            if (targetAngle_ > current) {
-                distanceToTarget = targetAngle_ - current;
-            }
-            else {
-                distanceToTarget = current - targetAngle_;
-            }
+            int direction = 0;
+            double distanceToTargetABS;
+            double distanceToTarget = 0;
+            distanceToTargetABS = Math.abs(targetAngle_ - current);
 
             // if equal to target angle with offset
-            if ( distanceToTarget < OFFSET) {
+            if ( distanceToTargetABS < OFFSET) {
                 rotation = 0;
                 // System.out.println("Within offset. Not moving.");
             }
             else if(autoCorrect_ == true) {
                 // move in the direction we need to get there
-                if (current >= 0){
+                if (current >= 0){ // if in positive hemisphere
                     double temp = current -180;
                     if(temp < targetAngle_ && targetAngle_ < current){
-                        rotation = -0.25;
-                        // System.out.println("Moving 1");
+                        direction = -1;
                     } 
                     else {
-                        rotation = 0.25;
-                        // System.out.println("Moving 2");
+                        direction = 1;
                     }
                 } 
-                else {
+                else { // if in negative hemisphere
                     double temp = current + 180;
                     if (current < targetAngle_ && targetAngle_ < temp){
-                        rotation = 0.25;
-                        // System.out.println("Moving 3");
+                        direction = 1;
                     } 
                     else {
-                        rotation = -0.25;
-                        // System.out.println("Moving 4");
+                        direction = -1;
                     }
                 }
             }
+            
+            switch (direction) {
+                case 1:
+                    distanceToTarget = distanceToTargetABS;
+                    break;
+                case -1:
+                    distanceToTarget = -distanceToTargetABS;
+                    break;
+            }
+
+            rotation = 0.1 * (Math.cbrt(5.555555555 * distanceToTarget));
         }
+
         if(Robotmode_){
             Robot.driveTrain.robotDrive(strafe_, vertical_, rotation);
         } else if (!Robotmode_){
