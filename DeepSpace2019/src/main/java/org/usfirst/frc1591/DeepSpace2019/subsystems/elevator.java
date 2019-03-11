@@ -1,5 +1,6 @@
 package org.usfirst.frc1591.DeepSpace2019.subsystems;
 
+import org.usfirst.frc1591.DeepSpace2019.Robot;
 import java.util.ArrayList;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -78,15 +79,17 @@ public class elevator extends Subsystem {
 
     @Override
     public void periodic() {
-        // This code is run every loop
-        if (elevatorMotor.get() < 0 && getTopSwitchState() == true) {
-            pause();
-            System.out.println("Top switch pressed. ABORT ABORT ABORT");
-        }
-        else if(elevatorMotor.get() >= 0 && getBottomSwitchState() == true) {
-            stop();
-            enc.reset();
-            // System.out.println("Bottom switch pressed. ABORT ABORT ABORT");
+        if (Robot.oi.manipulatorStick.getRawButton(7) == false) {
+            // This code is run every loop
+            if (elevatorMotor.get() < 0 && getTopSwitchState() == true) {
+                pause();
+                // System.out.println("Top switch pressed. ABORT ABORT ABORT");
+            }
+            else if(elevatorMotor.get() >= 0 && getBottomSwitchState() == true) {
+                stop();
+                enc.reset();
+                // System.out.println("Bottom switch pressed. ABORT ABORT ABORT");
+            }
         }
     }
 
