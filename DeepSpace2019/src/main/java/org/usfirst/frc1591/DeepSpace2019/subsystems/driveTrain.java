@@ -26,7 +26,7 @@ public class driveTrain extends Subsystem {
 
     public ArrayList<Double> Angles = new ArrayList<Double>();
 
-    public final float OFFSET = 2; // PLACEHOLDER
+    public final float OFFSET = 1; // PLACEHOLDER
     public double storedPosition;
 
     public driveTrain() {
@@ -166,7 +166,7 @@ public class driveTrain extends Subsystem {
                     break;
             }
 
-            rotation = 0.1 * (Math.cbrt(5.555555555 * distanceToTarget));
+            rotation = 0.1 * (Math.cbrt(1.0 * distanceToTarget));
         }
 
         if(Robotmode_){
