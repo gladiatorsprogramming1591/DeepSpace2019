@@ -112,8 +112,8 @@ public class OI {
         compressorButton = new JoystickButton(manipulatorStick, 1);
         liftButton = new JoystickButton(manipulatorStick, 9);
         
-        fieldDrive = new JoystickButton(driveStick, 5);
-        robotDrive = new JoystickButton(driveStick, 6);
+        fieldDrive = new JoystickButton(driveStick, 2);
+        robotDrive = new JoystickButton(driveStick, 3);
 
         Gyro1 = new JoystickButton(driveStick, 9);
         Gyro2 = new JoystickButton(driveStick, 10);

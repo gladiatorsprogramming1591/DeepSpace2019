@@ -39,12 +39,12 @@ public class driveManualRobot extends Command {
             slowMode = false;
         }
 
-        if (Robot.oi.driveStick.getRawButtonPressed(2)) {
+        if (Robot.oi.driveStick.getRawButtonPressed(5)) {
             rocketAnglesMode = false;
             targetAngle = Robot.AHRS.getYaw();
             autoCorrect = true;
         }
-        else if (Robot.oi.driveStick.getRawButtonPressed(3)) {
+        else if (Robot.oi.driveStick.getRawButtonPressed(6)) {
             rocketAnglesMode = true;
             targetAngle = Robot.AHRS.getYaw();
             autoCorrect = true;
