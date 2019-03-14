@@ -18,8 +18,8 @@ public class elevator extends Subsystem {
     Encoder enc;
     ArrayList<Integer> elevatorPositions;
 
-    final double ELEVATOR_UP_SPEED = 0.4;
-    final double ELEVATOR_DOWN_SPEED = -0.3;
+    final double ELEVATOR_UP_SPEED = 0.6;
+    final double ELEVATOR_DOWN_SPEED = -0.2;
     final double ELEVATOR_BRAKE_SPEED = 0.2;
     boolean bottomState; // state true if bottom limit switch is pushed in
     boolean topState; // state true if top limit switch is pushed in
@@ -36,9 +36,9 @@ public class elevator extends Subsystem {
     boolean distanceReached = false;
 
     // Constants for the elevator stops, CURRENTLY PLACEHOLDERS
-    int L1HATCH_POS = -15;
-    int CARGO_SHIP_POS = -340;
-    int L2HATCH_POS = -660;
+    int L1HATCH_POS = -10;
+    int CARGO_SHIP_POS = -183;
+    int L2HATCH_POS = -356;
 
     public elevator() {
         elevatorTopSwitch = new DigitalInput(0);
@@ -51,7 +51,7 @@ public class elevator extends Subsystem {
         
         elevatorMotor = new Spark(1);
         addChild("elevatorMotor",elevatorMotor);
-        elevatorMotor.setInverted(true);
+        elevatorMotor.setInverted(false);
         
         // Construct arraylist
         elevatorPositions = new ArrayList<Integer>();
@@ -81,11 +81,11 @@ public class elevator extends Subsystem {
     public void periodic() {
         if (Robot.oi.manipulatorStick.getRawButton(7) == false) {
             // This code is run every loop
-            if (elevatorMotor.get() < 0 && getTopSwitchState() == true) {
+            if (elevatorMotor.get() > 0 && getTopSwitchState() == true) {
                 pause();
                 // System.out.println("Top switch pressed. ABORT ABORT ABORT");
             }
-            else if(elevatorMotor.get() >= 0 && getBottomSwitchState() == true) {
+            else if(elevatorMotor.get() <= 0 && getBottomSwitchState() == true) {
                 stop();
                 enc.reset();
                 // System.out.println("Bottom switch pressed. ABORT ABORT ABORT");
