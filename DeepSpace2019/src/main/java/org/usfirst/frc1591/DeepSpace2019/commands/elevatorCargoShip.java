@@ -14,6 +14,8 @@ public class elevatorCargoShip extends Command {
     @Override
     protected void initialize() {
         Robot.elevator.moveInit(posIndex);
+        // Robot.elevator.up();
+        // setTimeout(0.5);
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -25,6 +27,7 @@ public class elevatorCargoShip extends Command {
     @Override
     protected boolean isFinished() {
         return Robot.elevator.moveIsFinished(posIndex);
+        // return isTimedOut();
     }
 
     // Called once after isFinished returns true

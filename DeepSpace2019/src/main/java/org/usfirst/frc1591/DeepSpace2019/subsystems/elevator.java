@@ -18,7 +18,7 @@ public class elevator extends Subsystem {
     Encoder enc;
     ArrayList<Integer> elevatorPositions;
 
-    final double ELEVATOR_UP_SPEED = 0.7;
+    final double ELEVATOR_UP_SPEED = 0.4;
     final double ELEVATOR_DOWN_SPEED = -0.3;
     final double ELEVATOR_BRAKE_SPEED = 0.2;
     boolean bottomState; // state true if bottom limit switch is pushed in

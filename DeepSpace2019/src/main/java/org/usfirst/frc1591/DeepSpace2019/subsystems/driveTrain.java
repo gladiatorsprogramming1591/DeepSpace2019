@@ -130,8 +130,12 @@ public class driveTrain extends Subsystem {
             double distanceToTarget = 0;
             distanceToTargetABS = Math.abs(targetAngle_ - current);
 
+            if ((targetAngle_ == 180.0) && (current < 0) && (distanceToTargetABS > (360-OFFSET))) {
+                rotation = 0;
+            }
+
             // if equal to target angle with offset
-            if ( distanceToTargetABS < OFFSET) {
+            else if ( distanceToTargetABS < OFFSET) {
                 rotation = 0;
                 // System.out.println("Within offset. Not moving.");
             }
