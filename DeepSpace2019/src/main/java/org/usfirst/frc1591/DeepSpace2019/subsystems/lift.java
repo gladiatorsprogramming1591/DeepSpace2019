@@ -42,11 +42,11 @@ public class lift extends Subsystem {
 
         frontUltrasonic = new Ultrasonic(7, 8);
         addChild("frontUltrasonic", frontUltrasonic);
-        SmartDashboard.putData("frontUltrasonic", frontUltrasonic);
+        // SmartDashboard.putData("frontUltrasonic", frontUltrasonic);
 
         rearUltrasonic = new Ultrasonic(5, 6);
         addChild("rearUltrasonic", rearUltrasonic);
-        SmartDashboard.putData("rearUltrasonic", rearUltrasonic);
+        // SmartDashboard.putData("rearUltrasonic", rearUltrasonic);
        
         SmartDashboard.putData("liftMotor", liftMotor);
         unliftFront();
@@ -59,8 +59,8 @@ public class lift extends Subsystem {
 
     @Override
     public void periodic() {
-        SmartDashboard.putNumber("frontHeight", getFrontHeight());
-        SmartDashboard.putNumber("rearHeight", getRearHeight());
+        // SmartDashboard.putNumber("frontHeight", getFrontHeight());
+        // SmartDashboard.putNumber("rearHeight", getRearHeight());
     }
 
     public boolean frontExtended = false;

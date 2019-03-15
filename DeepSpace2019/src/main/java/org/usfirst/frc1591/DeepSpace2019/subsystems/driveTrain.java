@@ -129,14 +129,19 @@ public class driveTrain extends Subsystem {
             double distanceToTargetABS;
             double distanceToTarget = 0;
 
-        //    distanceToTargetABS = Math.abs(targetAngle_ - current);
-            if (targetAngle_ > current) {
-                distanceToTargetABS = targetAngle_ - current;
+            if ((current < 0) && (targetAngle_ == 180)) {
+                targetAngle_ = -180;
             }
-            else {
-                distanceToTargetABS = current - targetAngle_;
-            }
-            distanceToTargetABS = Math.abs(distanceToTargetABS);
+
+            distanceToTargetABS = Math.abs(targetAngle_ - current);
+            
+        //     if (targetAngle_ > current) {
+        //         distanceToTargetABS = targetAngle_ - current;
+        //     }
+        //     else {
+        //         distanceToTargetABS = current - targetAngle_;
+        //     }
+        //     distanceToTargetABS = Math.abs(distanceToTargetABS);
 
         //    if ((targetAngle_ == 180.0) && (current < 0) && (distanceToTargetABS > (360-OFFSET))) {
         //        rotation = 0;
