@@ -61,8 +61,8 @@ public class Robot extends TimedRobot {
         
         // Feed the camera to the driver station
         UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
-        camera.setResolution(640, 480);
-        camera.setFPS(15);
+        camera.setResolution(320, 240);
+        camera.setFPS(30);
 
         driveTrain = new driveTrain();
         driveTrain.resetGyro();
