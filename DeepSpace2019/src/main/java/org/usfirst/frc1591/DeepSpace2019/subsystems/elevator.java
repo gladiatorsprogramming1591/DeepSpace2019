@@ -20,7 +20,7 @@ public class elevator extends Subsystem {
 
     final double ELEVATOR_UP_SPEED = 0.6;
     final double ELEVATOR_DOWN_SPEED = -0.2;
-    final double ELEVATOR_BRAKE_SPEED = 0.2;
+    final double ELEVATOR_BRAKE_SPEED = 0.2; //used to counteract gravity 
     boolean bottomState; // state true if bottom limit switch is pushed in
     boolean topState; // state true if top limit switch is pushed in
 
@@ -103,7 +103,7 @@ public class elevator extends Subsystem {
         return elevatorPositions.get(index);
     }
 
-    // Get the direction needed to be travelled by the elevator. 1 is up, -1 id down, 0 is not move
+    // Get the direction needed to be travelled by the elevator. 1 is up, -1 is down, 0 is not move
     public int getdirection(int targetPosIndex) {
         System.out.println("Moving from " + getCurrentPos() + " to " + getElevatorPositions(targetPosIndex));
         int direction;
