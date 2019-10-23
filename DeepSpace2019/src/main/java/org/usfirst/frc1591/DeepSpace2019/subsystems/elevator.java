@@ -20,7 +20,7 @@ public class elevator extends Subsystem {
 
     final double ELEVATOR_UP_SPEED = 0.6;
     final double ELEVATOR_DOWN_SPEED = -0.2;
-    final double ELEVATOR_BRAKE_SPEED = 0.2; //used to counteract gravity 
+    final double ELEVATOR_BRAKE_SPEED = 0.4;
     boolean bottomState; // state true if bottom limit switch is pushed in
     boolean topState; // state true if top limit switch is pushed in
 
